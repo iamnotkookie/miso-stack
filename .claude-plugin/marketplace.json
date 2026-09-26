@@ -1,0 +1,14 @@
+{
+  "name": "miso-local",
+  "owner": {
+    "name": "Lucas"
+  },
+  "plugins": [
+    {
+      "name": "miso-stack",
+      "source": "./plugins/miso-stack",
+      "description": "Lucas's engineering stack: evidence, clear writing, and portable workflows.",
+      "version": "0.1.1"
+    }
+  ]
+}

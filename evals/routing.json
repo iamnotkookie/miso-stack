@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "1",
+      "prompt": "Explain why the retry limit exists. Read code and project history; do not change anything.",
+      "expected_workflow": "investigation"
+    },
+    {
+      "id": "2",
+      "prompt": "Repair the export crash when the report has no rows.",
+      "expected_workflow": "bug-fix"
+    },
+    {
+      "id": "3",
+      "prompt": "Add a CSV export option to the existing command.",
+      "expected_workflow": "feature"
+    },
+    {
+      "id": "4",
+      "prompt": "Build two small alternatives for a dropdown interaction and compare them.",
+      "expected_workflow": "prototype"
+    },
+    {
+      "id": "5",
+      "prompt": "Extract the duplicated parser while preserving all behavior.",
+      "expected_workflow": "refactoring"
+    },
+    {
+      "id": "6",
+      "prompt": "The measured startup time is too high. Trace it and make one targeted improvement.",
+      "expected_workflow": "performance"
+    },
+    {
+      "id": "7",
+      "prompt": "Turn the chosen migration design into dependent units with proof for each.",
+      "expected_workflow": "plan"
+    },
+    {
+      "id": "8",
+      "prompt": "Write and test a how-to guide for the import command.",
+      "expected_workflow": "documentation"
+    },
+    {
+      "id": "9",
+      "prompt": "Run repeated experiments until the throughput target is reached, logging each result.",
+      "expected_workflow": "hillclimb"
+    },
+    {
+      "id": "10",
+      "prompt": "Diagnose the live process memory growth. Capture evidence; do not fix it yet.",
+      "expected_workflow": "runtime-forensics"
+    },
+    {
+      "id": "11",
+      "prompt": "Analyze this saved CPU profile and explain the hot path.",
+      "expected_workflow": "trace-forensics"
+    },
+    {
+      "id": "12",
+      "prompt": "Match the old UI pixel for pixel across the agreed states.",
+      "expected_workflow": "visual-parity"
+    },
+    {
+      "id": "13",
+      "prompt": "Create a reusable skill for checking this service and evaluate it.",
+      "expected_workflow": "authoring-a-skill"
+    },
+    {
+      "id": "14",
+      "prompt": "Compare the old and new prompt against these fixed cases.",
+      "expected_workflow": "eval"
+    },
+    {
+      "id": "15",
+      "prompt": "Check this existing PR and resolve verified CI and review issues until it is ready.",
+      "expected_workflow": "babysit"
+    },
+    {
+      "id": "16",
+      "prompt": "Prepare the verified release candidate, then deploy only after the required approval.",
+      "expected_workflow": "shipping"
+    },
+    {
+      "id": "17",
+      "prompt": "Work on this one task until its acceptance checks pass while I am away.",
+      "expected_workflow": "autonomous-run"
+    },
+    {
+      "id": "18",
+      "prompt": "Coordinate this multi-day program with several dependent work streams and owners.",
+      "expected_workflow": "orchestrate"
+    },
+    {
+      "id": "19",
+      "prompt": "Process this independent issue queue, taking each through build, verification, and authorized publication.",
+      "expected_workflow": "autopilot-full"
+    },
+    {
+      "id": "20",
+      "prompt": "Build the dependent changes as a reviewed stack. I will land it later.",
+      "expected_workflow": "autopilot-stack"
+    },
+    {
+      "id": "21",
+      "prompt": "Resume the unfinished work from this handoff and reconcile it with current files.",
+      "expected_workflow": "session-pickup"
+    },
+    {
+      "id": "22",
+      "prompt": "Pause now and leave enough verified state for another session to resume.",
+      "expected_workflow": "pause-safely"
+    },
+    {
+      "id": "23",
+      "prompt": "Audit unused worktrees and stale simulator resources. Show candidates before any deletion.",
+      "expected_workflow": "worktree-cleanup"
+    },
+    {
+      "id": "24",
+      "prompt": "Prepare a focused pull request for this completed change with the full test evidence.",
+      "expected_workflow": "opening-a-pr"
+    }
+  ]
+}

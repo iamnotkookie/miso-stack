@@ -1,0 +1,19 @@
+{
+  "name": "miso-stack",
+  "version": "0.1.1+codex.20260926203148",
+  "description": "Lucas's engineering stack: evidence, clear writing, and portable workflows.",
+  "author": {
+    "name": "Lucas"
+  },
+  "license": "MIT",
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "MisoStack",
+    "shortDescription": "Engineering work with observable proof.",
+    "longDescription": "MisoStack selects a workflow, uses the current harness tools, and verifies the result.",
+    "developerName": "Lucas",
+    "category": "Productivity",
+    "capabilities": [],
+    "defaultPrompt": "Use miso to investigate this project and explain the next useful step."
+  }
+}

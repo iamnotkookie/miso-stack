@@ -1,0 +1,10 @@
+MisoStack
+Copyright (c) 2026 Lucas
+
+Design references: Lauren Tan's pstack and The Complete Guide to pstack,
+Parts 1 and 2. Early compatibility research also consulted Michael Denyer's
+pstack-claude documentation.
+
+MisoStack contains original procedures and helper code. No upstream skill
+tree or cursor-team-kit code is vendored. This notice credits the design
+references; it does not imply affiliation or endorsement.

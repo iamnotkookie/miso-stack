@@ -1,0 +1,37 @@
+# Python bytecode, environments, and tool caches
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+node_modules/
+*.tgz
+npm-debug.log*
+
+# Local task state, evaluation runs, and evidence
+.miso/
+/sandbox/
+/sandboxes/
+/evals/runs/
+/evidence/
+*.json.lock
+*.jsonl.lock
+
+# Credentials and machine-local settings
+.env
+.env.*
+!.env.example
+!.env.template
+.claude/settings.local.json
+
+# Editor and operating-system files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~

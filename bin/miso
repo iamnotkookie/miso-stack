@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+MISO_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+exec python3 "$MISO_ROOT/plugins/miso-stack/scripts/miso.py" "$@"

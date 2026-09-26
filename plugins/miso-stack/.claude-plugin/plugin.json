@@ -1,0 +1,10 @@
+{
+  "name": "miso-stack",
+  "version": "0.1.1",
+  "description": "Lucas's engineering stack: evidence, clear writing, and portable workflows.",
+  "author": {
+    "name": "Lucas"
+  },
+  "license": "MIT",
+  "skills": "./skills/"
+}

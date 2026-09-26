@@ -1,0 +1,49 @@
+{
+  "name": "miso-stack",
+  "version": "0.1.1",
+  "private": true,
+  "description": "Shared engineering workflows for Codex, Claude Code, Grok Build, and OpenCode.",
+  "license": "MIT",
+  "author": "Lucas",
+  "type": "module",
+  "bin": {
+    "miso-stack": "bin/miso-stack.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "os": [
+    "darwin",
+    "linux"
+  ],
+  "files": [
+    "bin/",
+    "scripts/install.py",
+    "install.sh",
+    "plugins/miso-stack/skills/**/*.md",
+    "plugins/miso-stack/scripts/*.py",
+    "plugins/miso-stack/hooks/*.json",
+    "plugins/miso-stack/catalog.json",
+    "plugins/miso-stack/.codex-plugin/plugin.json",
+    "plugins/miso-stack/.claude-plugin/plugin.json",
+    "plugins/miso-stack/.grok-plugin/plugin.json",
+    "plugins/miso-stack/LICENSE",
+    "plugins/miso-stack/NOTICE",
+    ".agents/plugins/marketplace.json",
+    ".claude-plugin/marketplace.json",
+    ".grok-plugin/marketplace.json",
+    "docs/",
+    "evals/",
+    "scripts/check_reference.py",
+    "scripts/create_sandbox.py",
+    "scripts/run_evaluation.py",
+    "NOTICE",
+    "UPSTREAM.md",
+    "scripts/check_repository.py",
+    "tests/*.py"
+  ],
+  "scripts": {
+    "test": "python3 -m unittest discover -s tests -v",
+    "check": "python3 scripts/check_repository.py"
+  }
+}

@@ -1,0 +1,7 @@
+**/__pycache__/
+**/*.pyc
+**/*.lock
+evidence/
+.miso/
+.env*
+.DS_Store
