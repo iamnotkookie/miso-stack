@@ -25,3 +25,5 @@ Keep credentials, raw host traces, and local evidence out of commits and package
 Review changes to install hooks, shell execution, paths, symlinks, evidence handling, permissions, and dependencies. Run the existing tests and package checks. Preserve meaningful failure-path coverage.
 
 The repository uses pinned GitHub Actions, restricted workflow permissions, dependency review, and code scanning. These checks support review; they do not prove that every skill behaves safely in every host.
+
+See [Maintain the GitHub repository](docs/how-to/maintain-repository.md) for contribution checks and repository protections.
