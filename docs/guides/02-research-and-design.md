@@ -38,7 +38,7 @@ The usage example is a target. It should remain useful as implementation fills i
 
 ## Compare alternatives with experiments
 
-Use `miso-arena` for a consequential choice with several plausible answers. Give candidates the same constraints and compare them against a declared rubric.
+Use `miso-design` for a consequential choice with several plausible answers. Give candidates the same constraints and compare them against a declared rubric.
 
 ```text
 Use miso to prototype two approaches to incremental search.

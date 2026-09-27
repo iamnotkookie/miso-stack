@@ -4,11 +4,9 @@ import json
 import os
 from pathlib import Path
 import re
-import sys
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PLUGIN = ROOT / "plugins/miso-stack"
 EXCLUDED = {".git", "evidence", ".miso", ".venv", "venv", "__pycache__", "sandbox", "sandboxes", "runs"}
 
 
@@ -35,16 +33,7 @@ def check():
             destination = (path.parent / link.split("#")[0]).resolve()
             if not destination.exists():
                 failures.append(f"{path.relative_to(ROOT)}: broken link {link}")
-    audit = json.loads((ROOT / "docs/reference-audit.json").read_text())
-    sources = [item["source"] for item in audit["items"]]
-    if len(set(sources)) != len(sources):
-        failures.append("Duplicate reference mapping.")
-    for item in audit["items"]:
-        if item["status"] == "implemented" and not (PLUGIN / item["target"]).is_file():
-            failures.append("Missing mapped capability: " + item["source"])
-        if item["status"] not in {"implemented", "out-of-scope"}:
-            failures.append("Unresolved capability: " + item["source"])
-    print(json.dumps({"valid": not failures, "reference_items": len(sources), "errors": failures}, indent=2))
+    print(json.dumps({"valid": not failures, "errors": failures}, indent=2))
     return bool(failures)
 
 

@@ -1,25 +1,31 @@
 # Skill and workflow catalog
 
-Start with `miso`. Call a supporting skill directly when you need only that capability. All skills follow the same model, writing, and authority rules.
+Start with `miso` and describe the task. [The router](../../plugins/miso-stack/skills/miso/references/routing.md) covers every supporting skill. Call a supporting skill directly when you need only that capability. All skills follow the same model, writing, and authority rules.
 
 ## Skills
 
 | Skill | Purpose |
 | --- | --- |
-| [miso](../../plugins/miso-stack/skills/miso/SKILL.md) | Applies Lucas's engineering workflows, writing rules, and evidence standards. Use when the user asks for miso, rigorous engineering, or a MisoStack workflow. |
-| [miso-arena](../../plugins/miso-stack/skills/miso-arena/SKILL.md) | Compares independent candidate solutions against a common rubric. Use when the user asks for alternatives, competing designs, or an arena. |
+| [miso](../../plugins/miso-stack/skills/miso/SKILL.md) | Routes plain-language engineering requests to MisoStack skills and workflows. Use miso to investigate, design, specify, build, review, verify, or explain work without remembering sub-skill names. |
 | [miso-author](../../plugins/miso-stack/skills/miso-author/SKILL.md) | Creates or improves compact skills from stated requirements and evaluated examples. Use for skill authoring or capturing an explicitly stated working preference. |
 | [miso-automate](../../plugins/miso-stack/skills/miso-automate/SKILL.md) | Designs bounded engineering routines and handles issue reports with reproduction evidence. Use when drafting a recurring check, triaging a report, or automating a proven workflow. |
+| [miso-debug](../../plugins/miso-stack/skills/miso-debug/SKILL.md) | Diagnoses bugs and performance regressions with a reproducible failure and controlled experiments. Use for broken, intermittent, or unexpectedly slow behavior. |
 | [miso-design](../../plugins/miso-stack/skills/miso-design/SKILL.md) | Designs interfaces from usage and tests architectural choices with prototypes. Use when creating a subsystem, changing ownership, or comparing substantial designs. |
 | [miso-docs](../../plugins/miso-stack/skills/miso-docs/SKILL.md) | Writes and verifies technical documentation in Simplified Technical English. Use for tutorials, how-to guides, references, explanations, READMEs, or documentation reviews. |
 | [miso-eval](../../plugins/miso-stack/skills/miso-eval/SKILL.md) | Evaluates skill behavior with sandbox tasks and explicit grading criteria. Use when testing prompts, skill changes, routing, or harness compatibility. |
+| [miso-garden](../../plugins/miso-stack/skills/miso-garden/SKILL.md) | Maintains codebase structure and turns recurring defects into enforced constraints. Use for codebase gardening, repeated helpers, growing suppressions, architecture drift, or installing anti-slop checks. |
+| [miso-loop](../../plugins/miso-stack/skills/miso-loop/SKILL.md) | Repeats a scoped task with verification until it succeeds or reaches a stop condition. Use for a bounded build-test-fix loop, a Ralph-style loop, or resuming and cancelling repeated work. |
+| [miso-merge](../../plugins/miso-stack/skills/miso-merge/SKILL.md) | Resolves an existing Git merge or rebase conflict by preserving the intent of both changes. Use for conflicted files or a stopped merge/rebase, not to start a new merge or publish code. |
+| [miso-perf](../../plugins/miso-stack/skills/miso-perf/SKILL.md) | Measures and improves latency, throughput, memory, or startup behavior. Use for performance improvements, profiling, benchmark design, or repeated optimization experiments. |
 | [miso-plan](../../plugins/miso-stack/skills/miso-plan/SKILL.md) | Creates and runs dependency-aware plans with proof for each task. Use for multi-phase work, migrations, orchestration, or a task that has no existing playbook. |
 | [miso-reflect](../../plugins/miso-stack/skills/miso-reflect/SKILL.md) | Turns observed workflow failures into targeted improvements. Use when the user asks to reflect, review a session, or improve an existing skill. |
 | [miso-research](../../plugins/miso-stack/skills/miso-research/SKILL.md) | Traces behavior, decision history, and relevant prior work. Use when investigating how or why something works, recalling project context, or explaining a system. |
 | [miso-review](../../plugins/miso-stack/skills/miso-review/SKILL.md) | Reviews correctness, security, change impact, and code quality against evidence. Use for code review, adversarial review, blast-radius analysis, or final quality checks. |
 | [miso-setup](../../plugins/miso-stack/skills/miso-setup/SKILL.md) | Checks MisoStack discovery and host capabilities without choosing fixed models. Use when installing MisoStack, diagnosing skill loading, or configuring a project. |
+| [miso-spec](../../plugins/miso-stack/skills/miso-spec/SKILL.md) | Turns the conversation and repository evidence into a scoped specification with acceptance checks. Use when the user asks for a spec, requirements, or a written definition of what to build. |
 | [miso-swarm](../../plugins/miso-stack/skills/miso-swarm/SKILL.md) | Coordinates bounded independent work and verifies returned artifacts. Use when parallel research, coverage partitions, or candidate races are requested. |
 | [miso-tdd](../../plugins/miso-stack/skills/miso-tdd/SKILL.md) | Uses a failing behavioral test to guide a small implementation change. Use when TDD is requested or a bug has a practical regression-test path. |
+| [miso-tickets](../../plugins/miso-stack/skills/miso-tickets/SKILL.md) | Splits an agreed spec or plan into small verifiable tickets with explicit blockers. Use for breaking work into issues or preparing a backlog, with local files or an authorized tracker. |
 | [miso-trail](../../plugins/miso-stack/skills/miso-trail/SKILL.md) | Keeps a concise evidence-backed decision trail for long work. Use for unattended runs, migrations, or an auditable handoff. |
 | [miso-verify](../../plugins/miso-stack/skills/miso-verify/SKILL.md) | Runs, creates, or maintains project-specific verification tools and feature maps. Use when proving a change works, creating a control skill, or auditing verification coverage. |
 

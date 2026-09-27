@@ -1,7 +1,6 @@
 {
   "name": "miso-stack",
-  "version": "0.1.1",
-  "private": true,
+  "version": "0.2.0",
   "description": "Shared engineering workflows for Codex, Claude Code, Grok Build, and OpenCode.",
   "license": "MIT",
   "author": "Lucas",
@@ -19,6 +18,7 @@
   "files": [
     "bin/",
     "scripts/install.py",
+    "scripts/install_ui.py",
     "install.sh",
     "plugins/miso-stack/skills/**/*.md",
     "plugins/miso-stack/scripts/*.py",
@@ -34,16 +34,24 @@
     ".grok-plugin/marketplace.json",
     "docs/",
     "evals/",
-    "scripts/check_reference.py",
     "scripts/create_sandbox.py",
     "scripts/run_evaluation.py",
     "NOTICE",
-    "UPSTREAM.md",
     "scripts/check_repository.py",
-    "tests/*.py"
+    "tests/*.py",
+    "SECURITY.md"
   ],
   "scripts": {
+    "postinstall": "node bin/postinstall.mjs",
     "test": "python3 -m unittest discover -s tests -v",
     "check": "python3 scripts/check_repository.py"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamnotkookie/miso-stack.git"
+  },
+  "homepage": "https://github.com/iamnotkookie/miso-stack#readme",
+  "bugs": {
+    "url": "https://github.com/iamnotkookie/miso-stack/issues"
   }
 }

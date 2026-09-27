@@ -18,3 +18,5 @@ Use for: Resolve CI failures, review findings, or conflicts on an existing PR.
 ## Completion evidence
 
 Readiness is established for the current PR revision; merge remains a separate action.
+
+For an in-progress merge or rebase conflict, use [miso-merge](../../miso-merge/SKILL.md). Keep conflict resolution distinct from permission to merge or publish the PR.

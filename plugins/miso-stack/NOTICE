@@ -3,7 +3,10 @@ Copyright (c) 2026 Lucas
 
 Design references: Lauren Tan's pstack and The Complete Guide to pstack,
 Parts 1 and 2. Early compatibility research also consulted Michael Denyer's
-pstack-claude documentation.
+pstack-claude documentation. The requested engineering capability set also
+references Matt Pocock's skills (github.com/mattpocock/skills).
+Bounded iteration draws on the Ralph loop technique; lint setup guidance
+references dmmulroy/anti-slop. These external implementations are not bundled.
 
 MisoStack contains original procedures and helper code. No upstream skill
 tree or cursor-team-kit code is vendored. This notice credits the design

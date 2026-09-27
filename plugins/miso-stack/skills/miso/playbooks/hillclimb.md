@@ -13,7 +13,7 @@ Use for: Run a bounded series of measured experiments.
 
 ## Supporting skills
 
-[miso-plan](../../miso-plan/SKILL.md), [miso-trail](../../miso-trail/SKILL.md), [miso-verify](../../miso-verify/SKILL.md)
+[miso-perf](../../miso-perf/SKILL.md), [miso-loop](../../miso-loop/SKILL.md), [miso-trail](../../miso-trail/SKILL.md)
 
 ## Completion evidence
 

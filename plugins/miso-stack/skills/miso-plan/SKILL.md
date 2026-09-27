@@ -19,3 +19,9 @@ Apply the shared rules and current host map in [miso](../miso/SKILL.md). When ca
 The CLI is a local task ledger, not a worker scheduler. Host tools execute tasks. Plans stay local unless the user requests publication or project rules require it.
 
 Resolve `<plugin-root>` from this installed skill's real path: its grandparent contains `skills/` and `scripts/`. Resolve symlinks first. Never create a helper at a guessed path.
+
+## Implement a spec or tickets
+
+Read the complete source requirements, acceptance checks, and blockers. Work only the ready tasks. Use the agreed test boundaries and [miso-tdd](../miso-tdd/SKILL.md) where practical. Run focused tests and applicable type checks as the implementation changes, then the relevant full suite at the end. Use [miso-review](../miso-review/SKILL.md) to check both standards and requirements. Commit only when authorized; a request for a plan alone does not authorize implementation.
+
+Use [miso-spec](../miso-spec/SKILL.md) when the requested artifact is a specification and [miso-tickets](../miso-tickets/SKILL.md) for a backlog. Do not substitute a task ledger for either artifact.

@@ -17,3 +17,9 @@ Apply the shared rules and current host map in [miso](../miso/SKILL.md). When ca
 7. Report what was executed and what remains unverified. Do not claim certified STE compliance from a prose review or a heuristic checker.
 
 Deliver the document and evidence for its examples. Keep the main README short and link to details.
+
+## Edit existing prose
+
+For “unslop”, “make this clearer”, or “less AI”, preserve meaning, evidence, uncertainty, identifiers, and the writer's intended tone. Replace vague claims and ornate words with specific facts and plain verbs. Remove filler, repeated summaries, forced lists, inflated praise, and unnecessary formatting. Restore full sentences when compression makes the reader decode the text. Do not invent a source or remove an uncertainty qualifier merely to sound confident.
+
+Return the edited text unless the user asks for an explanation of the edits. Ordinary prose cleanup needs no repository investigation. A request to simplify the previous answer routes to the plain-restatement mode in [miso-research](../miso-research/SKILL.md).

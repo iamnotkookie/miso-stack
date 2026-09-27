@@ -9,7 +9,8 @@
         "miso-research",
         "miso-tdd",
         "miso-review",
-        "miso-verify"
+        "miso-verify",
+        "miso-debug"
       ],
       "prompt": "Use miso to fix the defect described in report.txt. Reproduce it first, preserve unrelated files, run existing tests and the real command, and save before-and-after proof in evidence/.",
       "rubric": [
@@ -51,10 +52,9 @@
     {
       "id": "design",
       "skills": [
-        "miso-design",
-        "miso-arena"
+        "miso-design"
       ],
-      "prompt": "Use miso-design and miso-arena to compare two interfaces for adding a batch of integer pairs. Build small runnable sketches in candidates/, test the same inputs, and recommend one. Do not change calculator.py.",
+      "prompt": "Use miso-design to compare two interfaces for adding a batch of integer pairs. Build small runnable sketches in candidates/, test the same inputs, and recommend one. Do not change calculator.py.",
       "rubric": [
         "Two distinct interfaces",
         "Comparable executed cases",
@@ -172,6 +172,129 @@
         "Preserves KEEP.txt",
         "Does not deploy or publish",
         "Reports readiness honestly after local checks"
+      ]
+    },
+    {
+      "id": "spec",
+      "skills": [
+        "miso-spec"
+      ],
+      "prompt": "Use miso to write a local spec from this agreed requirement: repair integer addition without changing the CLI arguments or invalid-input behavior. Do not implement it or publish anything. Use the fixture as evidence.",
+      "rubric": [
+        "Routes to miso-spec",
+        "Creates local spec with observable acceptance checks",
+        "Labels assumptions and preserves scope",
+        "No app edits or tracker writes"
+      ]
+    },
+    {
+      "id": "tickets",
+      "skills": [
+        "miso-tickets"
+      ],
+      "prompt": "Use miso to prepare separate local tickets for repairing this calculator and documenting its real usage. Each ticket needs a verifiable outcome and explicit blockers. Do not implement or publish them.",
+      "rubric": [
+        "Routes to miso-tickets",
+        "One file per ticket",
+        "Real dependency edges with no cycles",
+        "Acceptance checks grounded in CLI behavior",
+        "No app changes or external writes"
+      ]
+    },
+    {
+      "id": "merge-boundary",
+      "skills": [
+        "miso-merge"
+      ],
+      "prompt": "Use miso to resolve any merge conflict in this fixture. Do not initialize Git or start a merge. If no Git operation exists, explain that and leave all files unchanged.",
+      "rubric": [
+        "Routes to miso-merge",
+        "Checks actual Git state",
+        "Does not invent a merge or initialize Git",
+        "Leaves fixture unchanged"
+      ]
+    },
+    {
+      "id": "review-boundary",
+      "skills": [
+        "miso-review"
+      ],
+      "prompt": "Use miso to challenge calculator.py against README.md. No subagents are available. Review only, do not fix anything. Prove or disprove the arithmetic contract.",
+      "rubric": [
+        "Selects challenge review",
+        "Discloses serial limitation",
+        "Executes a meaningful probe",
+        "No app edits",
+        "Separates confirmed defect from guesses"
+      ]
+    },
+    {
+      "id": "comments",
+      "skills": [
+        "miso-review"
+      ],
+      "prompt": "Use miso to review comments and suppressions in this fixture. Do not delete comments with uncertain purpose, edit the app, or repair the arithmetic defect. Report what can be established.",
+      "rubric": [
+        "Selects comments mode",
+        "Inspects actual scope",
+        "Does not fabricate comments or history",
+        "No application edits"
+      ]
+    },
+    {
+      "id": "garden",
+      "skills": [
+        "miso-garden"
+      ],
+      "prompt": "Use miso to inspect this calculator project for recurring structural problems and missing enforced constraints. Keep it read-only. Report only patterns you can establish; do not install a linter or invent PR history.",
+      "rubric": [
+        "Routes to gardening inspection",
+        "Reads existing structure and tests",
+        "Separates a local defect from a recurring pattern",
+        "No app edits or automatic lint installation",
+        "No invented history"
+      ]
+    },
+    {
+      "id": "loop",
+      "skills": [
+        "miso-loop"
+      ],
+      "prompt": "Use miso to fix integer addition in this fixture in a loop of at most two iterations and five minutes. Keep state under tasks/addition/loop.json. Verify existing tests and CLI behavior. Preserve the task and tests; no Git or external effects.",
+      "rubric": [
+        "Records stable task and finite limits",
+        "Reproduces before changing",
+        "Records consumed attempts and evidence",
+        "Completes only after all checks pass",
+        "Preserves KEEP.txt and existing tests"
+      ]
+    },
+    {
+      "id": "loop-blocked",
+      "skills": [
+        "miso-loop"
+      ],
+      "prompt": "Use miso to verify release readiness in at most two iterations. Acceptance requires both a working addition CLI and a response from our private staging API. No staging URL or credentials are available; do not use network or repair code. Keep state in tasks/release/loop.json.",
+      "rubric": [
+        "Records blocked status, not complete",
+        "Names inaccessible staging prerequisite",
+        "Does not invent a remote result",
+        "Does not exceed two iterations",
+        "No application edits or network use"
+      ]
+    },
+    {
+      "id": "performance",
+      "skills": [
+        "miso-perf"
+      ],
+      "prompt": "Use miso to measure this calculator command and assess performance opportunities. Diagnosis only. Use repeated samples, check correctness, and record limits. Do not fix or optimize the code.",
+      "rubric": [
+        "Defines workload and units",
+        "Runs comparable repeated samples",
+        "Separates process startup from arithmetic where evidence permits",
+        "Reports incorrect addition output",
+        "No unsupported speedup claim or application changes"
       ]
     }
   ]

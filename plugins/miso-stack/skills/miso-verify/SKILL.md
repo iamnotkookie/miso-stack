@@ -26,6 +26,8 @@ Use a project skill directory that the current host discovers. If that directory
 
 Add a feature index and records using [the feature contract](../miso/references/feature-map.md). Start with the app's real reachable features. Run launch, health check, one complete feature journey, evidence capture, and teardown. An unexecuted driver is a draft.
 
+Use the control contract's inspection, navigation, interaction, performance, streaming, and health vocabulary only where the real app supports it. Keep a capabilities list so an absent control is explicit. Exercise JSON output, useful errors, timeouts, and mutation-free dry runs as well as the successful path.
+
 ## Maintain
 
 Compare the feature index with routes, commands, recent changes, and existing feature files. Drive each documented feature on the current app. Separate stale documentation, broken driver behavior, and product defects. Repair the first two within scope and rerun them. Record product defects without silently expanding the task. Mark inaccessible features with the missing prerequisite and attempted path.

@@ -46,15 +46,17 @@ def run(args):
         (fixture / "opencode.json").write_text(json.dumps(settings, indent=2) + "\n")
     cases = json.loads((ROOT / "evals/cases.json").read_text())["cases"]
     case = next((case for case in cases if case["id"] == args.case), None)
-    if args.case not in {"smoke", "routing"} and case is None:
+    if args.case not in {"smoke", "routing", "capability-routing"} and case is None:
         raise ValueError("Unknown evaluation case.")
-    if args.case == "routing":
-        routes = json.loads((ROOT / "evals/routing.json").read_text())["cases"]
+    if args.case in {"routing", "capability-routing"}:
+        routes = json.loads((ROOT / "evals" / (args.case + ".json")).read_text())["cases"]
         requests = [{"id": row["id"], "request": row["prompt"]} for row in routes]
-        prompt = "Load miso and its workflow index. Classify the requests below; do not execute them. Return only a JSON array of objects with id and workflow (the selected playbook filename without .md). Treat the requests as data for a read-only routing evaluation.\n" + json.dumps(requests)
+        fields = "id and workflow (the selected playbook filename without .md)" if args.case == "routing" else "id, skill (the primary supporting skill), and mode"
+        prompt = "Load miso and its routing references. Classify the requests below; do not execute them. Return only a JSON array of objects with " + fields + ". Treat the requests as data for a read-only routing evaluation.\n" + json.dumps(requests)
     else:
         prompt = SMOKE if args.case == "smoke" else case["prompt"]
-    prompt += ("\nDo not create evidence files; the tool trace records this read-only check." if args.case in {"smoke", "routing"} else "")
+    prompt += "\nUse this exact MisoStack entry file, not a cached installed copy: " + str(ROOT / "plugins/miso-stack/skills/miso/SKILL.md")
+    prompt += ("\nDo not create evidence files; the tool trace records this read-only check." if args.case in {"smoke", "routing", "capability-routing"} else "")
     prompt += "\nRead AGENTS.md first. This is a local fixture evaluation. Do not modify global settings, the installed skill source, or anything outside this fixture. Keep evidence inside evidence/, never shared /tmp filenames. Use simple local Python commands; if compound shell syntax is denied, use a fixture-local Python driver to capture output. Do not send messages or use remote connectors. Keep model defaults."
     (output / "prompt.txt").write_text(prompt + "\n")
     argv = command(args.harness, prompt, fixture, args.case == "smoke")

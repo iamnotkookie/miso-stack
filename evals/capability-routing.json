@@ -1,0 +1,227 @@
+{
+  "version": 1,
+  "cases": [
+    {
+      "id": "architect",
+      "prompt": "Design an interface for importing a batch of records.",
+      "skill": "miso-design",
+      "mode": "default"
+    },
+    {
+      "id": "blast-radius",
+      "prompt": "What could this serializer change break downstream?",
+      "skill": "miso-review",
+      "mode": "impact"
+    },
+    {
+      "id": "bro",
+      "prompt": "Say your last answer like a human. No jargon.",
+      "skill": "miso-research",
+      "mode": "plain restatement"
+    },
+    {
+      "id": "create-verification-skill",
+      "prompt": "Create a reusable control skill for this app.",
+      "skill": "miso-verify",
+      "mode": "create"
+    },
+    {
+      "id": "how",
+      "prompt": "Where does session state live and how does logout clear it?",
+      "skill": "miso-research",
+      "mode": "mechanics"
+    },
+    {
+      "id": "interrogate",
+      "prompt": "Challenge this diff and find blind spots. Review only.",
+      "skill": "miso-review",
+      "mode": "challenge"
+    },
+    {
+      "id": "no-comments",
+      "prompt": "Clean up redundant comments, but keep real constraints.",
+      "skill": "miso-review",
+      "mode": "comments"
+    },
+    {
+      "id": "recall",
+      "prompt": "Recall where we left off with authentication last week.",
+      "skill": "miso-research",
+      "mode": "recall"
+    },
+    {
+      "id": "swarm",
+      "prompt": "Run parallel workers over these independent test partitions.",
+      "skill": "miso-swarm",
+      "mode": "default"
+    },
+    {
+      "id": "tdd",
+      "prompt": "Write a failing regression test before repairing this parser.",
+      "skill": "miso-tdd",
+      "mode": "default"
+    },
+    {
+      "id": "teach",
+      "prompt": "Teach me why and how this cache works.",
+      "skill": "miso-research",
+      "mode": "teach"
+    },
+    {
+      "id": "technical-writing",
+      "prompt": "Write a how-to guide for deploying this service.",
+      "skill": "miso-docs",
+      "mode": "write"
+    },
+    {
+      "id": "unslop",
+      "prompt": "Edit this paragraph to remove filler and AI phrasing.",
+      "skill": "miso-docs",
+      "mode": "edit"
+    },
+    {
+      "id": "code-review",
+      "prompt": "Review this branch against the spec and our coding standards.",
+      "skill": "miso-review",
+      "mode": "code review"
+    },
+    {
+      "id": "codebase-design",
+      "prompt": "Simplify the module interface so callers know less about storage.",
+      "skill": "miso-design",
+      "mode": "default"
+    },
+    {
+      "id": "diagnosing-bugs",
+      "prompt": "Investigate this intermittent timeout. Do not change production code.",
+      "skill": "miso-debug",
+      "mode": "default"
+    },
+    {
+      "id": "implement",
+      "prompt": "Implement the approved spec and ready tickets.",
+      "skill": "miso-plan",
+      "mode": "execute"
+    },
+    {
+      "id": "resolving-merge-conflicts",
+      "prompt": "Resolve the conflicts in my stopped rebase.",
+      "skill": "miso-merge",
+      "mode": "default"
+    },
+    {
+      "id": "to-spec",
+      "prompt": "Turn our agreed conversation into a local spec. Do not implement.",
+      "skill": "miso-spec",
+      "mode": "default"
+    },
+    {
+      "id": "to-tickets",
+      "prompt": "Split this approved spec into local tickets with blockers.",
+      "skill": "miso-tickets",
+      "mode": "default"
+    },
+    {
+      "id": "maintain",
+      "prompt": "The feature map is stale. Bring the verification driver up to date.",
+      "skill": "miso-verify",
+      "mode": "maintain"
+    },
+    {
+      "id": "check",
+      "prompt": "Prove the export works through the real UI.",
+      "skill": "miso-verify",
+      "mode": "run"
+    },
+    {
+      "id": "why",
+      "prompt": "Why did this project choose queues instead of direct calls?",
+      "skill": "miso-research",
+      "mode": "intent"
+    },
+    {
+      "id": "compare-designs",
+      "prompt": "Compare two structurally different candidate implementations.",
+      "skill": "miso-design",
+      "mode": "default"
+    },
+    {
+      "id": "setup",
+      "prompt": "The host cannot discover the installed miso skills.",
+      "skill": "miso-setup",
+      "mode": "default"
+    },
+    {
+      "id": "author",
+      "prompt": "Create a reusable skill for this established workflow.",
+      "skill": "miso-author",
+      "mode": "default"
+    },
+    {
+      "id": "eval",
+      "prompt": "Test whether this skill routes requests correctly.",
+      "skill": "miso-eval",
+      "mode": "default"
+    },
+    {
+      "id": "reflect",
+      "prompt": "Improve the workflow from the mistakes in this session.",
+      "skill": "miso-reflect",
+      "mode": "default"
+    },
+    {
+      "id": "automate",
+      "prompt": "Draft a daily routine for this proven health check.",
+      "skill": "miso-automate",
+      "mode": "default"
+    },
+    {
+      "id": "trail",
+      "prompt": "Keep a concise evidence-backed decision trail for this migration.",
+      "skill": "miso-trail",
+      "mode": "default"
+    },
+    {
+      "id": "garden-inspect",
+      "prompt": "Inspect recent changes for repeated helpers and rising lint suppressions. Report patterns only.",
+      "skill": "miso-garden",
+      "mode": "inspect"
+    },
+    {
+      "id": "garden-enforce",
+      "prompt": "Add checks that reject forbidden imports across our module boundaries.",
+      "skill": "miso-garden",
+      "mode": "enforce"
+    },
+    {
+      "id": "anti-slop-setup",
+      "prompt": "Install anti-slop lint rules without migrating application code.",
+      "skill": "miso-garden",
+      "mode": "enforce"
+    },
+    {
+      "id": "loop",
+      "prompt": "Keep implementing and checking this spec for at most five iterations.",
+      "skill": "miso-loop",
+      "mode": "default"
+    },
+    {
+      "id": "loop-cancel",
+      "prompt": "Cancel the active work loop and preserve its evidence.",
+      "skill": "miso-loop",
+      "mode": "default"
+    },
+    {
+      "id": "performance",
+      "prompt": "Reduce report generation time and prove the improvement on the same inputs.",
+      "skill": "miso-perf",
+      "mode": "default"
+    },
+    {
+      "id": "performance-repeat",
+      "prompt": "Run a bounded series of performance experiments on startup latency.",
+      "skill": "miso-perf",
+      "mode": "default"
+    }
+  ]
+}

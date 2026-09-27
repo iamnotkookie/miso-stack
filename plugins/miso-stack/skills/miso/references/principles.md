@@ -1,14 +1,22 @@
 # Engineering principles
 
-These concise rules interpret the pstack ideas for MisoStack. They are guidance for decisions, not 23 separate skills.
+These rules guide engineering decisions in MisoStack. Apply them when they help resolve a concrete choice.
 
 ## laziness-protocol
 
 **Choose the smallest complete change.** Remove unnecessary work and reuse a proven tool before inventing a layer.
 
+Inspect forwarding functions, repeated decisions, and representation leaks before adding an abstraction. Put a decision with its owner instead of coordinating copies across callers. If a new flag must travel through many layers, inspect whether the responsibility is in the wrong place. Prefer a direct path that preserves boundaries. Optimize the maintenance burden, not a line-count target; a deep module can hide substantial work without a long chain of pass-through calls.
+
 ## foundational-thinking
 
 **Start with ownership and data.** Name the domain objects, state owners, and proof method before adding behavior.
+
+Choose data structures from actual access patterns and invariants. Similar statements need not become a generic abstraction; shared domain structure matters more than textual duplication. Before actors share mutable state, trace concurrent writes and choose isolation or an explicit owner. Remove obsolete structure within scope, then build only the types, checks, and setup that unblock later work. Each increment should make a coherent capability easier to use.
+
+## enforced-architecture
+
+**Make invalid changes fail early.** Use module boundaries, schemas, type checks, compiler diagnostics, and targeted lint rules to enforce the architecture. A rule in a document needs a person or agent to remember it; an executable check can reject a violation. Test both a forbidden case and a valid case. Invest in these constraints before growing a longer instruction file. See [gardening](../../miso-garden/SKILL.md) for recurring maintenance.
 
 ## redesign-from-first-principles
 

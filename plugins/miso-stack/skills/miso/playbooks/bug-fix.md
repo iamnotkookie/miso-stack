@@ -4,7 +4,7 @@ Use for: Reproduce and repair incorrect behavior.
 
 ## Procedure
 
-1. State expected and reported behavior. Reproduce the problem on the user-facing surface before changing code.
+1. Use [miso-debug](../../miso-debug/SKILL.md) to build a precise failing signal, minimize it, and test the cause. State expected and reported behavior. Reproduce the problem on the user-facing surface before changing code.
 2. Save the failing command, input, and output. If the environment prevents reproduction, record that limit and avoid claiming a confirmed fix.
 3. Trace the cause with targeted instrumentation. Reject hypotheses that conflict with observed behavior.
 4. Write a regression test first when a practical path exists. Apply the smallest change that addresses the demonstrated cause.

@@ -4,7 +4,7 @@ MisoStack was qualified on macOS on 26 September 2026. The checks below separate
 
 This records the initial qualification. Lucas subsequently authorized repository initialization and the first local commit, along with a README revision. Source hashes describe the files at qualification time.
 
-The result supports use of this local release. It does not establish statistical reliability or complete runtime parity with pstack.
+The result supports use of this local release. It does not establish statistical reliability or complete coverage of every workflow.
 
 ## Package and helpers
 
@@ -14,7 +14,7 @@ The result supports use of this local release. It does not establish statistical
 | Python helper suite | 20 tests passed |
 | Official skill validator | All 16 skills passed |
 | Plugin manifests | Codex, Claude Code, and Grok Build validators passed |
-| Repository check | Python syntax, JSON, local document links, and 73 reference mappings passed |
+| Repository check | Python syntax, JSON, and local document links passed |
 | Relocated package | References and startup reminder worked from a path containing spaces |
 | Shared installation | All 16 links point to this source; collisions and repeat installation tested |
 | Deferred Git | No repository initialized |
@@ -57,7 +57,7 @@ The [case catalog](../evals/cases.json) covers all 16 skills through 12 tasks. C
 | Bug fix | Reproduced the defect, repaired one operator, passed five tests, and verified real output. |
 | Research | Traced subtraction and distinguished the addition contract from unavailable historical intent. No invented history. |
 | Documentation | Ran documented commands and described the known defect without repairing the app. |
-| Design and arena | Built two interfaces and compared 36 cases. Independent rerun passed all 36. Serial fallback was explicit. |
+| Design comparison | Built two interfaces and compared 36 cases. Independent rerun passed all 36. Serial fallback was explicit. |
 | Review | Proved the arithmetic mismatch with a command and preserved application source. |
 | Verification | Created a real control skill and feature map. Independent rerun passed nine control checks while correctly reporting the product defect. |
 | Plan and trail | Finished the first task with hashed proof, retained a decision trail, and exposed only the dependent documentation task as ready. |
@@ -82,36 +82,99 @@ Generated control skills used authorized fixture directories and explicit path i
 
 A zero process exit did not erase these failures. The run ledger retains their grades and reasons.
 
-## Reference comparison loop
-
-The reference is pstack revision `ecc249f1e306fc64ddf83c7bed16cacf7c2239db`: 50 skills and 23 playbooks, including 23 principle skills.
-
-The first pass mapped gaps and built the original MisoStack capabilities. Later passes tested helpers, host loading, and agent behavior, then repaired observed failures. A final public inventory check returned the same revision, with no new or removed entries.
-
-The [audit](reference-audit.json) maps 72 entries to MisoStack implementations. Grok Bot UI is excluded because it is outside the four agreed harnesses. Several entries share a skill or reference. This is capability coverage, not 72 independent runtime tests.
-
-Repeat the inventory check with:
-
-```sh
-python3 scripts/check_reference.py --live
-```
-
 ## npm installer qualification
 
-The current local suite has 28 passing tests. Seven installer tests cover detection, repeat installation, dry runs, marketplace conflicts, skill collisions, missing hosts, and native-command failures. A packaging test builds a tarball and installs it into an isolated npm prefix.
+The 0.1.1 qualification passed 28 tests. Seven installer tests cover detection, repeat installation, dry runs, marketplace conflicts, skill collisions, missing hosts, and native-command failures. A packaging test builds a tarball and installs it into an isolated npm prefix.
 
 The packed command was run from outside the source directory. It registered the stable installed source through a controlled host stub, and repeat installation kept one marketplace registration. The archive includes the required hidden manifests and excludes evidence and Python caches. The package's repository check also passed.
 
 The source installer was then run against the four real harnesses on this machine. All native installation commands and shared links completed successfully. The npm CLI was installed locally and its preview ran from `/tmp`. These installation checks do not repeat the earlier behavioral evaluation.
 
-Run `npm test` and `npm run check` from the checkout to repeat the local checks. Public npm distribution remains pending; the package is marked private.
+Run `npm test` and `npm run check` from the checkout to repeat the local checks. Version 0.1.1 is published on npm. Version 0.1.2 adds the interactive installer described below.
 
 ## Evidence and limits
 
-Detailed receipts, run grades, source hashes, and fixture artifacts remain local under `evidence/qualification/`. This directory is ignored by Git. Raw host traces remain under `/tmp/miso-evals/` and may contain unrelated host configuration. A new checkout includes this summary, the evaluation cases, and the scripts needed to produce fresh evidence.
+The original qualification used local receipts, run grades, source hashes, and fixture artifacts. The local `evidence/` folder was later removed at the maintainer's request. A new checkout includes this summary, the evaluation cases, and the scripts needed to produce fresh evidence. Use temporary folders for new runs.
 
 The qualification record describes observations from the original machine. Local evidence files are not required to install MisoStack or run its deterministic tests. Follow the [evaluation guide](how-to/evaluate.md) to repeat the checks in your own environment.
 
 Native multi-agent dispatch, browser visual parity, runtime profilers, remote PR actions, production deployment, and active schedulers were not exercised. Their workflows require a real project and its tools. The fixture prohibited subagents and external effects; serial fallback and inactive routines were tested instead.
 
-Successful control checks do not mean the sample app passed: expected product failures remained in the local evidence. Writing follows the stated Simplified Technical English and Zinsser rules; no formal ASD-STE100 certification is claimed.
+Successful control checks do not mean the sample app passed: the original runs recorded expected product failures. Writing follows the stated Simplified Technical English and Zinsser rules; no formal ASD-STE100 certification is claimed.
+
+
+## Interactive npm installer (0.1.2)
+
+The helper and packaging suite now contains 33 tests. The npm test builds a tarball and installs it into a temporary prefix. It drives the real npm lifecycle through a controlling pseudo-terminal. This test needs permission to open `/dev/tty`; a restrictive agent sandbox may require an exception for the test. Native harness commands use test doubles, so this test does not change the developer's harness settings.
+
+The checks cover the recommended all-harness selection, a subset, invalid input, cancellation, and missing harnesses. Package checks cover plain `npm install -g` with its default script settings, the optional foreground-scripts mode, Codex selection, repeat installation, and recovery after a native setup failure. Installs without a controlling terminal, CI, disabled scripts, and local dependency hooks skip the prompt. Existing tests check marketplace conflicts and shared-link collisions before writes.
+
+The tarball contains the postinstall hook and shared source. It excludes evidence folders and Python bytecode. Repository validation and package checks also pass. This release does not repeat the earlier live agent evaluations; it changes installation, not skill behavior.
+
+
+## Terminal picker (0.1.3)
+
+The suite contains 37 passing tests. New terminal tests cover Enter to accept all, arrow keys and Space to select a subset, an empty selection, Escape to cancel, a 48-column monochrome layout, and the plain-terminal fallback. The terminal harness also checks that echo and line-input modes are restored.
+
+The packed npm installer runs in a controlling pseudo-terminal with npm's normal progress output enabled. A terminal-screen parser was used separately to inspect the rendered menu before input. The checkboxes, highlighted first option, and keyboard controls remained visible. The parser is a temporary review tool, not a project or runtime dependency.
+
+The picker uses Python's standard curses module. No npm runtime dependency was added. These checks ran on macOS; the terminal UI was not separately exercised on Linux.
+
+
+## Skills and router (0.2.0)
+
+The package now contains 20 skills and 24 workflows.
+
+Independent forward tests used the updated `miso` entry and host default models in separate temporary fixtures. The routing evaluator saw only the 30 requests, not expected labels. Its selected skill and mode matched all 30 expected outcomes. Single-purpose routes use mode `default`.
+
+The artifact evaluator produced a standards-and-requirements review with executed CLI probes, a local spec, and separate dependent tickets. The application and unrelated marker stayed unchanged. A separate existing Git merge fixture preserved both the new label and thousands formatting; both tests passed. Only the resolved file was staged, and the merge remained uncommitted as requested.
+
+A debugging evaluator loaded the new debugging procedure, reproduced the calculator defect, repaired its cause, and passed all five existing tests. The lead reran the tests and real CLI commands. Existing regression tests supplied the red-green evidence; duplicate tests were unnecessary.
+
+The routing evaluator found two scope ambiguities: design-only work could advance into implementation, and a narrow rewrite still inherited mandatory startup reads. Both instructions were corrected and independently rechecked. The TDD instructions now explicitly allow reuse of an existing failing regression test.
+
+At this qualification, the deterministic suite contained 39 tests, including complete router reachability, negative coverage for an omitted skill, package relocation, and the real npm terminal picker. `miso.py check` and repository validation passed.
+
+Raw forward-test artifacts are temporary, under the `miso-capability-eval-jn9v80zt` directory in the system temporary directory. They are not shipped or committed. The prompts and grading criteria remain in `evals/`.
+
+These are bounded samples in Codex agent contexts. They do not establish every mode on all four harnesses, every comment-cleanup scenario, real remote tracker publication, or review across different model families. New native plugin manifests use version 0.2.0 so updates can distinguish this skill set from cached 0.1.x installations.
+
+## Usage documentation check
+
+The usage guide now distinguishes the host invocation forms. These were checked against official host documentation; this pass did not exercise each native slash-command UI.
+
+The tutorial's shell blocks ran from the globally installed npm package in a new temporary folder. The command first returned `-1`, and three of five tests failed. After a local repair, the documented checks returned `5` and `1`, and all five tests passed. `KEEP.txt` stayed unchanged and no Git repository was created. The scripted check disabled Python bytecode writes to avoid stale caches during a same-second edit. It tested the shell procedure, not another independent agent run.
+
+Package validation, repository links, and whitespace checks passed. The full suite passed 38 of 39 tests on npm 11.19.1. The automatic-picker packaging test failed because npm blocked the package's postinstall script pending `allowScripts` approval. A retry with a process-local `npm_config_allow_scripts` value did not change that result. The test still assumes scripts run under default npm policy; it needs an update for this npm behavior. No global npm policy was changed.
+
+The installation guide now documents manual setup with `miso-stack install` and npm's package-specific `--allow-scripts` option. This result supersedes the earlier all-pass claim for the current npm environment; it does not indicate a skill-routing failure.
+
+## Current local checks
+
+The current suite has 38 passing tests. The installer fixture now permits its exact temporary tarball path, which is how npm matches local package script permissions. A real controlling terminal is also required; a sandbox that blocks `/dev/tty` cannot qualify the automatic picker. The successful rerun used that terminal access without changing global npm policy. Package validation confirms 22 skills and 24 workflows. Repository syntax and link checks, whitespace checks, and the npm package preview pass. The package includes the local validation tools and routing evaluation cases.
+
+## Gardening, loops, performance, and app controls
+
+The design skill now handles candidate comparison directly. Three new skills cover codebase gardening, bounded iteration, and measured performance work. All 22 skill folders passed frontmatter and structure validation. The package preview includes the new skills and excludes the removed skill and local evidence.
+
+Independent evaluators used isolated temporary fixtures and the host default model. A routing pass received the 37 requests without expected labels. All selected skills and modes matched. No task requests were executed during routing.
+
+| Behavioral check | Observed result |
+| --- | --- |
+| Gardening repair | Two UI modules moved to the domain API. An import check integrated with the existing unittest command. Seven forbidden and six allowed examples were checked; all five tests passed after repair. User outputs stayed unchanged. |
+| Verified loop completion | The addition task consumed two of two allowed iterations. The original failure was reproduced, then all five existing tests and real CLI output passed. Tests and the unrelated marker were preserved. |
+| Unavailable prerequisite | A separate release-readiness run stopped as blocked after one attempt. Missing staging access stayed unverified; no network or code repair was attempted. |
+| Exhausted loop | Resuming a saved two-of-two iteration state produced `limit-reached`, with no additional attempt or application edit. |
+| Cancellation | A running loop changed to `cancelled`, retained consumed limits, and preserved existing files and evidence. |
+| Performance | A grouping workload ran at 2,000 and 6,000 events, with two warmups and nine alternating samples per implementation and size. Correct outputs and order were preserved; five correctness tests passed. Traced peak allocation increased by about 17%, which the report disclosed. |
+| CLI controls | The generated driver exercised real CLI behavior, JSON errors, missing instances, a bounded timeout, and cleanup preview. Five driver tests passed. The three existing calculator failures remained visible because repairing the app was out of scope. |
+
+The lead independently reran the gardening, repaired calculator, performance correctness, and control-driver tests. A separate timing rerun confirmed the direction of the fixture improvement. These measurements establish behavior on this small synthetic workload, not a production performance guarantee.
+
+The first performance evaluator preserved baseline source but measured it only after changing the implementation. That did not satisfy the required measurement-before-edit sequence. The procedure now requires a recorded baseline sample artifact before the first optimization edit; the initial run is not a complete procedural pass.
+
+A fresh fixture rechecked that correction. The baseline artifact was saved before the first optimization edit, with source hashes and timestamped phases. Five alternating samples per implementation and size confirmed the improvement; six correctness tests passed. The lead verified the baseline artifact hash and phase order, then reran those tests. The allocation tradeoff remained visible. This was a targeted recheck after feedback, not another blind evaluation.
+
+Artifacts remain in the system temporary directory under `miso-workflows-jqntqyqe`; they are not shipped. The behavioral and routing prompts remain in `evals/`.
+
+Limits: these tests used Codex agent contexts, not every native host UI. The boundary check handles static imports, not arbitrary dynamic imports. No real PR stream, external anti-slop installation, scheduler, browser capture, or continuation hook was tested. Cancellation had no live owned background process to stop. Cleanup execution was unavailable under the fixture's no-deletion rule; only the read-only preview was qualified. The loop is an active-session procedure, not a background service.

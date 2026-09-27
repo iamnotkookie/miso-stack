@@ -13,7 +13,7 @@ Use for: Resolve a design or behavioral uncertainty with executable alternatives
 
 ## Supporting skills
 
-[miso-design](../../miso-design/SKILL.md), [miso-arena](../../miso-arena/SKILL.md), [miso-verify](../../miso-verify/SKILL.md)
+[miso-design](../../miso-design/SKILL.md), [miso-verify](../../miso-verify/SKILL.md)
 
 ## Completion evidence
 

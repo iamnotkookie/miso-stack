@@ -30,6 +30,27 @@ The resulting tool should expose useful operations through help and subcommands.
 
 Keep app-specific selectors, ports, seed data, and feature flags in the app. MisoStack supplies the method; it does not guess those values.
 
+## Choose commands for the app you have
+
+Start with the controls needed by one real journey. Add more when they serve a reachable feature:
+
+| Need | Examples |
+| --- | --- |
+| Inspect state | `info`, `snapshot`, `screenshot`, `components` |
+| Reach a feature | `home`, `new-session`, `select-project`, `select-runtime`, `scroll` |
+| Act on it | `send`, `click`, `click-xy`, `aria-click`, `type`, `press`, `eval`, `upload-image`, `add-context`, `feature-flag` |
+| Measure behavior | `trace`, `profile`, `record`, `perf-metrics`, `wait-settle` |
+| Observe runtime events | `console`, `network-log`, `network-summary` |
+| Operate the test instance | `doctor`, `cleanup`, `watch --restart` |
+
+These are candidate commands for your app's driver, not commands supplied by the MisoStack CLI. A terminal app needs real terminal controls; adding a placeholder screenshot command would not help it verify anything.
+
+The interface should hide setup details and let commands compose through stable instance and session IDs. Use subcommands to reveal controls gradually. Root and subcommand `--help` should explain prerequisites, examples, flags, JSON fields, and exit codes.
+
+For example, a failed click should identify the missing target and suggest taking a new snapshot. A timeout should report what it was waiting for. Commands should return parseable JSON, write diagnostics to stderr, and exit nonzero on failure.
+
+Test the failure paths too. A cleanup preview must leave files and processes unchanged. Actual cleanup must preserve unrelated resources and saved evidence. Bound waits, event streams, and restart attempts. See [the control contract](../../plugins/miso-stack/skills/miso/references/verification.md) for the complete requirements.
+
 ## Make the feature map useful
 
 A feature map tells the next agent what the app does and how to reach the behavior. Each record should name its entry paths, prerequisites, control commands, expected state, and recovery steps.

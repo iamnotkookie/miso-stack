@@ -5,12 +5,7 @@
     {
       "name": "miso",
       "path": "skills/miso/SKILL.md",
-      "description": "Applies Lucas's engineering workflows, writing rules, and evidence standards. Use when the user asks for miso, rigorous engineering, or a MisoStack workflow."
-    },
-    {
-      "name": "miso-arena",
-      "path": "skills/miso-arena/SKILL.md",
-      "description": "Compares independent candidate solutions against a common rubric. Use when the user asks for alternatives, competing designs, or an arena."
+      "description": "Routes plain-language engineering requests to MisoStack skills and workflows. Use miso to investigate, design, specify, build, review, verify, or explain work without remembering sub-skill names."
     },
     {
       "name": "miso-author",
@@ -21,6 +16,11 @@
       "name": "miso-automate",
       "path": "skills/miso-automate/SKILL.md",
       "description": "Designs bounded engineering routines and handles issue reports with reproduction evidence. Use when drafting a recurring check, triaging a report, or automating a proven workflow."
+    },
+    {
+      "name": "miso-debug",
+      "path": "skills/miso-debug/SKILL.md",
+      "description": "Diagnoses bugs and performance regressions with a reproducible failure and controlled experiments. Use for broken, intermittent, or unexpectedly slow behavior."
     },
     {
       "name": "miso-design",
@@ -36,6 +36,26 @@
       "name": "miso-eval",
       "path": "skills/miso-eval/SKILL.md",
       "description": "Evaluates skill behavior with sandbox tasks and explicit grading criteria. Use when testing prompts, skill changes, routing, or harness compatibility."
+    },
+    {
+      "name": "miso-garden",
+      "path": "skills/miso-garden/SKILL.md",
+      "description": "Maintains codebase structure and turns recurring defects into enforced constraints. Use for codebase gardening, repeated helpers, growing suppressions, architecture drift, or installing anti-slop checks."
+    },
+    {
+      "name": "miso-loop",
+      "path": "skills/miso-loop/SKILL.md",
+      "description": "Repeats a scoped task with verification until it succeeds or reaches a stop condition. Use for a bounded build-test-fix loop, a Ralph-style loop, or resuming and cancelling repeated work."
+    },
+    {
+      "name": "miso-merge",
+      "path": "skills/miso-merge/SKILL.md",
+      "description": "Resolves an existing Git merge or rebase conflict by preserving the intent of both changes. Use for conflicted files or a stopped merge/rebase, not to start a new merge or publish code."
+    },
+    {
+      "name": "miso-perf",
+      "path": "skills/miso-perf/SKILL.md",
+      "description": "Measures and improves latency, throughput, memory, or startup behavior. Use for performance improvements, profiling, benchmark design, or repeated optimization experiments."
     },
     {
       "name": "miso-plan",
@@ -63,6 +83,11 @@
       "description": "Checks MisoStack discovery and host capabilities without choosing fixed models. Use when installing MisoStack, diagnosing skill loading, or configuring a project."
     },
     {
+      "name": "miso-spec",
+      "path": "skills/miso-spec/SKILL.md",
+      "description": "Turns the conversation and repository evidence into a scoped specification with acceptance checks. Use when the user asks for a spec, requirements, or a written definition of what to build."
+    },
+    {
       "name": "miso-swarm",
       "path": "skills/miso-swarm/SKILL.md",
       "description": "Coordinates bounded independent work and verifies returned artifacts. Use when parallel research, coverage partitions, or candidate races are requested."
@@ -71,6 +96,11 @@
       "name": "miso-tdd",
       "path": "skills/miso-tdd/SKILL.md",
       "description": "Uses a failing behavioral test to guide a small implementation change. Use when TDD is requested or a bug has a practical regression-test path."
+    },
+    {
+      "name": "miso-tickets",
+      "path": "skills/miso-tickets/SKILL.md",
+      "description": "Splits an agreed spec or plan into small verifiable tickets with explicit blockers. Use for breaking work into issues or preparing a backlog, with local files or an authorized tracker."
     },
     {
       "name": "miso-trail",
@@ -101,6 +131,7 @@
       "trigger": "Reproduce and repair incorrect behavior.",
       "path": "skills/miso/playbooks/bug-fix.md",
       "skills": [
+        "miso-debug",
         "miso-research",
         "miso-tdd",
         "miso-verify",
@@ -130,7 +161,6 @@
       "path": "skills/miso/playbooks/prototype.md",
       "skills": [
         "miso-design",
-        "miso-arena",
         "miso-verify"
       ],
       "proof": "Comparable observations support the chosen design or explicitly show an unresolved result.",
@@ -156,7 +186,7 @@
       "trigger": "Fix a specific measured performance problem.",
       "path": "skills/miso/playbooks/performance.md",
       "skills": [
-        "miso-research",
+        "miso-perf",
         "miso-verify",
         "miso-review"
       ],
@@ -194,9 +224,9 @@
       "trigger": "Run a bounded series of measured experiments.",
       "path": "skills/miso/playbooks/hillclimb.md",
       "skills": [
-        "miso-plan",
-        "miso-trail",
-        "miso-verify"
+        "miso-perf",
+        "miso-loop",
+        "miso-trail"
       ],
       "proof": "Each accepted experiment has comparable measurements and the final result passes correctness checks.",
       "default": false
@@ -269,7 +299,8 @@
       "skills": [
         "miso-research",
         "miso-review",
-        "miso-verify"
+        "miso-verify",
+        "miso-merge"
       ],
       "proof": "Readiness is established for the current PR revision; merge remains a separate action.",
       "default": false
@@ -293,6 +324,7 @@
       "trigger": "Execute one long task while the user is away.",
       "path": "skills/miso/playbooks/autonomous-run.md",
       "skills": [
+        "miso-loop",
         "miso-plan",
         "miso-trail",
         "miso-verify"
@@ -391,5 +423,9 @@
       "proof": "The review package accurately describes the full change and its executed checks.",
       "default": false
     }
-  ]
+  ],
+  "routing": {
+    "entry": "miso",
+    "path": "skills/miso/references/routing.md"
+  }
 }

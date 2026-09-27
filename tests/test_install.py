@@ -12,6 +12,7 @@ from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
 SPEC = importlib.util.spec_from_file_location("miso_installer", ROOT / "scripts/install.py")
 INSTALLER = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(INSTALLER)
@@ -55,6 +56,7 @@ class InstallerTest(unittest.TestCase):
         self.environment = patch.dict(os.environ, {
             "PATH": str(self.bin) + os.pathsep + os.environ["PATH"],
             "MISO_INSTALL_TEST_STATE": str(self.root),
+            "TERM": "dumb",
         })
         self.environment.start()
         self.addCleanup(self.environment.stop)
@@ -63,7 +65,7 @@ class InstallerTest(unittest.TestCase):
         self.addCleanup(self.home_patch.stop)
 
     def invoke(self, names=(), dry_run=False):
-        args = type("Args", (), {"harnesses": names, "dry_run": dry_run})()
+        args = type("Args", (), {"harnesses": names, "dry_run": dry_run, "yes": True})()
         with contextlib.redirect_stdout(io.StringIO()):
             INSTALLER.install(args)
 
@@ -74,7 +76,7 @@ class InstallerTest(unittest.TestCase):
     def test_detect_install_and_repeat_keep_links_and_marketplaces(self):
         self.invoke()
         target = self.home / ".agents/skills"
-        self.assertEqual(len(list(target.glob("miso*/SKILL.md"))), 16)
+        self.assertEqual(len(list(target.glob("miso*/SKILL.md"))), 22)
         self.invoke()
         adds = [c for c in self.calls() if c[1:4] == ["plugin", "marketplace", "add"]]
         self.assertEqual(len(adds), 2)
@@ -117,6 +119,40 @@ class InstallerTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "not found"):
                 self.invoke(["codex"])
         self.assertEqual(self.calls(), [])
+
+    def choose(self, answers):
+        args = type("Args", (), {"harnesses": [], "dry_run": False, "yes": False})()
+        with patch.object(sys.stdin, "isatty", return_value=True), \
+                patch.object(sys.stdout, "isatty", return_value=True), \
+                patch("builtins.input", side_effect=answers):
+            return INSTALLER.select_targets(args)
+
+    def test_picker_default_selects_all_detected(self):
+        self.assertEqual(self.choose([""]), list(INSTALLER.HOSTS))
+
+    def test_picker_retries_invalid_and_accepts_multiple_choices(self):
+        self.assertEqual(self.choose(["unknown", "2, opencode 2"]), ["codex", "opencode"])
+
+    def test_picker_cancel_does_not_run_native_commands(self):
+        args = type("Args", (), {"harnesses": [], "dry_run": False, "yes": False})()
+        with patch.object(sys.stdin, "isatty", return_value=True), \
+                patch.object(sys.stdout, "isatty", return_value=True), \
+                patch("builtins.input", return_value="0"):
+            INSTALLER.install(args)
+        self.assertEqual(self.calls(), [])
+        self.assertFalse((self.home / ".agents").exists())
+
+    def test_headless_requires_explicit_targets_or_yes(self):
+        args = type("Args", (), {"harnesses": [], "dry_run": False, "yes": False})()
+        with patch.object(sys.stdin, "isatty", return_value=False):
+            with self.assertRaisesRegex(ValueError, "--yes"):
+                INSTALLER.install(args)
+        self.assertEqual(self.calls(), [])
+
+    def test_no_detected_harnesses_has_actionable_error(self):
+        with patch.object(INSTALLER.shutil, "which", return_value=None):
+            with self.assertRaisesRegex(ValueError, "No supported harness"):
+                self.invoke()
 
 
 if __name__ == "__main__":

@@ -12,9 +12,10 @@ if (command === '--version' || command === '-v') {
 } else if (!command || command === '--help' || command === '-h') {
   console.log(`MisoStack
 
-Usage: miso-stack install [codex claude grok opencode] [--dry-run]
+Usage: miso-stack install [codex claude grok opencode] [--yes] [--dry-run]
 
-Without harness names, detect installed harnesses.
+Without harness names, choose from detected harnesses in an interactive picker.
+Use --yes to install for all detected harnesses without prompting.
 Requires Python 3.10+ and a supported harness on PATH.
 Keep this package installed: skill links refer to its source.
 `);
@@ -22,7 +23,7 @@ Keep this package installed: skill links refer to its source.
   console.error(`Unknown command: ${command}. Use miso-stack --help.`);
   process.exitCode = 2;
 } else if (root.split(/[\\/]/).includes('_npx') && !args.includes('--dry-run') && !args.includes('--help')) {
-  console.error('Install from a stable location: npm install -g miso-stack, then miso-stack install. Temporary npx cache paths cannot own shared skill links. For this unpublished package, install the local checkout or tarball instead.');
+  console.error('Install from a stable location: npm install -g miso-stack. Temporary npx cache paths cannot own shared skill links.');
   process.exitCode = 1;
 } else {
   const result = spawnSync('python3', [join(root, 'scripts/install.py'), ...args], {

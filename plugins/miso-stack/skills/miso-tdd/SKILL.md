@@ -9,7 +9,7 @@ license: MIT
 Apply the shared rules and current host map in [miso](../miso/SKILL.md). When called directly, run this procedure after reading those rules. When called from a playbook, continue that playbook without restarting routing.
 
 1. State the behavior from the caller's point of view. Find the closest existing test harness.
-2. Write the smallest test that exposes the missing behavior. Use a fixed expected result, not a copy of the implementation. Keep real dependencies when safe and practical.
+2. Reuse an existing regression test if it already exposes the missing behavior. Otherwise write the smallest useful test. Use a fixed expected result, not a copy of the implementation. Keep real dependencies when safe and practical.
 3. Run the test against the unchanged implementation. Confirm it fails for the expected reason. A syntax error or missing dependency is not the required red result.
 4. Make the smallest implementation change that passes the behavioral test.
 5. Run the test, then the relevant existing suite. Refactor only while checks stay green.

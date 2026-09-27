@@ -1,4 +1,3 @@
-import importlib.util
 import json
 import os
 from pathlib import Path
@@ -49,15 +48,23 @@ class PackageTest(unittest.TestCase):
         covered = {name for case in cases for name in case["skills"]}
         self.assertEqual({skill["name"] for skill in catalog["skills"]}, covered)
 
-    def test_reference_check_detects_new_capability(self):
-        spec = importlib.util.spec_from_file_location("reference_check", ROOT / "scripts/check_reference.py")
-        module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(module)
-        audit = json.loads((ROOT / "docs/reference-audit.json").read_text())
-        paths = [item["source"] for item in audit["items"]]
-        result = module.compare({"sha": audit["reference_sha"], "paths": paths + ["pstack/skills/new-capability/SKILL.md"]})
-        self.assertEqual(result["new_capabilities"], ["pstack/skills/new-capability/SKILL.md"])
-        self.assertEqual(result["removed_capabilities"], [])
+    def test_routing_cases_cover_every_supporting_skill(self):
+        catalog = json.loads((PLUGIN / "catalog.json").read_text())
+        cases = json.loads((ROOT / "evals/capability-routing.json").read_text())["cases"]
+        self.assertEqual({skill["name"] for skill in catalog["skills"]} - {catalog["entry"]},
+                         {case["skill"] for case in cases})
+        self.assertEqual(len({case["id"] for case in cases}), len(cases))
+
+    def test_package_rejects_a_router_that_omits_a_skill(self):
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory) / "plugin"
+            shutil.copytree(PLUGIN, target, ignore=shutil.ignore_patterns("__pycache__"))
+            router = target / "skills/miso/references/routing.md"
+            router.write_text("\n".join(line for line in router.read_text().splitlines()
+                                         if "../../miso-spec/SKILL.md" not in line))
+            result = subprocess.run([sys.executable, str(target / "scripts/miso.py"), "check"], capture_output=True, text=True)
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("router does not reach every supporting skill", result.stderr)
 
     def test_fixture_exposes_defect_and_preserves_existing_directory(self):
         with tempfile.TemporaryDirectory() as directory:

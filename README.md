@@ -11,7 +11,36 @@ Use miso to fix the export command. Empty reports crash it.
 Reproduce the failure, fix the cause, and show the same command passing.
 ```
 
-[Install](#install) · [Try a sandbox task](docs/tutorials/first-verified-change.md) · [Read the guides](#learn-the-workflow) · [See test results](docs/verification.md)
+[Install](#install) · [Use Miso](docs/how-to/use-miso.md) · [Try a sandbox task](docs/tutorials/first-verified-change.md) · [Read the guides](#learn-the-workflow) · [See test results](docs/verification.md)
+
+## Just ask miso
+
+Open your project in your coding agent. Send a task in its chat:
+
+| Agent | Example |
+| --- | --- |
+| Codex | `$miso explain how this project works` |
+| Claude Code | `/miso-stack:miso explain how this project works` |
+| Grok Build | `/miso explain how this project works` |
+| OpenCode | `Use miso to explain how this project works.` |
+
+**Can you use `/miso`?** Yes in Grok Build. In Codex, use `$miso` or select Miso from `/skills`. Claude Code uses the plugin prefix. OpenCode uses its skill loader; this package does not add a `/miso` command there. See [invocation details and host documentation](docs/how-to/use-miso.md#can-i-type-miso).
+
+You can also use `Use miso to…` in every supported agent. Describe the result you want:
+
+```text
+Use miso to explain how this cache works and why it exists.
+Use miso to turn our discussion into a spec and separate tickets. Do not implement yet.
+Use miso to implement the approved spec and verify the result.
+Use miso to challenge this diff. Review only.
+Use miso to resolve the conflicts in this rebase.
+```
+
+Miso selects the supporting skills. A review stays read-only. A spec request produces a spec. Implementation starts when you request it. For a combined task, Miso runs the relevant steps in order and honors your stop points.
+
+Read [Use Miso for everyday work](docs/how-to/use-miso.md) for a walkthrough, ready-to-use prompts, and help when a skill does not load.
+
+The [routing table](plugins/miso-stack/skills/miso/references/routing.md) covers every supporting skill.
 
 ## How it works
 
@@ -24,31 +53,33 @@ MisoStack is a set of skills, workflows, and local tools that runs inside your e
 
 For the export example, a passing unit test helps check the contract. Running the export and inspecting the saved file checks the user outcome. MisoStack asks for both when both matter.
 
-The shared source contains **16 skills and 24 workflows**. Eight workflows cover daily engineering: investigation, bug fixes, features, prototypes, refactoring, performance, plans, and documentation. Specialist workflows cover reviews, traces, visual checks, skill evaluation, PR work, and session recovery.
+The shared source contains **22 skills and 24 workflows**. Eight workflows cover daily engineering: investigation, bug fixes, features, prototypes, refactoring, performance, plans, and documentation. Specialist workflows cover reviews, traces, visual checks, skill evaluation, PR work, and session recovery.
 
 ## Install
 
-Install the CLI with npm, then let it set up your coding agents. From this checkout:
+Install from npm and choose your coding agents:
 
 ```sh
-npm install -g .
-miso-stack install
+npm install -g miso-stack
 ```
 
-The installer detects Codex, Claude Code, Grok Build, and OpenCode on your PATH. It checks the package, installs native plugins, and creates shared skill links where needed.
+The installer opens a keyboard picker with all detected harnesses selected. Use the arrow keys to move, Space to toggle, and Enter to install. It installs native plugins for Codex and Claude Code, and shared skill links for Grok Build and OpenCode.
 
-Start a fresh session and ask for **miso**. In Claude Code, you can also use `/miso-stack:miso`.
+The prompt opens during installation on macOS and Linux when npm permits install scripts. If npm reports blocked scripts, run `miso-stack install` to open setup yourself. Press Esc to cancel setup. To change your selection later, run the same command.
 
-To select one harness or preview changes:
+Start a fresh session in your project and use [the entry for your agent](#just-ask-miso).
+
+To select one harness, install without prompts, or preview changes:
 
 ```sh
 miso-stack install codex
+miso-stack install --yes
 miso-stack install --dry-run
 ```
 
 Requires **Node.js 18+, Python 3.10+, and macOS or Linux**. Keep the npm package installed; shared skills refer to its files. Model access and hook trust use your harness's normal controls.
 
-This package is not published to npm yet. After publication, `npm install -g miso-stack` will replace the local install command above. You can also use `./install.sh` directly from the checkout without Node.js.
+To test a checkout, use `npm install -g .`. You can also run `./install.sh` without Node.js.
 
 See the [installation guide](docs/how-to/install.md) for options and manual commands, or [troubleshooting](docs/how-to/troubleshoot.md) if something fails.
 
@@ -69,7 +100,7 @@ You do not need to select every supporting skill. The entry chooses them from th
 ### Understand an unfamiliar system
 
 ```text
-Use miso-research to explain how retries work and why the limit exists.
+Use miso to explain how retries work and why the limit exists.
 Read the implementation and available history. Label inferred reasons.
 Keep this pass read-only.
 ```
@@ -79,9 +110,9 @@ Mechanics, historical intent, and explanation need different evidence. Missing h
 ### Make a consequential design choice
 
 ```text
-Use miso-design to design a batch import API from the caller's perspective.
-Compare two runnable approaches with miso-arena. Test partial failure
-and cancellation before recommending one.
+Use miso to design a batch import API from the caller's perspective.
+Compare two runnable approaches. Test partial failure and cancellation
+before recommending one. Stop before production implementation.
 ```
 
 Candidates use a common rubric. Independent workers are used only when available and permitted. Otherwise, the work runs serially and says so.
@@ -99,7 +130,7 @@ A faster single run can be noise. The workflow asks for comparable conditions an
 ### Build a verification tool for your app
 
 ```text
-Use miso-verify to create a project-local control skill.
+Use miso to create a project-local control skill.
 Reuse our existing browser tooling. Add a health check, a feature map,
 and one complete user journey. Execute it and preserve the proof.
 ```
@@ -109,7 +140,7 @@ The driver belongs in your app. Its feature map explains how to reach behavior, 
 ### Plan work that spans sessions
 
 ```text
-Use miso-plan to migrate the parser in small, verifiable steps.
+Use miso to migrate the parser in small, verifiable steps.
 Preserve the public format. Record dependencies, evidence, and decisions
 so another session can continue the work.
 ```
@@ -121,8 +152,13 @@ The local plan helper checks dependencies, ownership, and accepted evidence hash
 | Task | Skills |
 | --- | --- |
 | Understand code, history, and prior work | `miso-research` |
-| Design interfaces and compare alternatives | `miso-design`, `miso-arena` |
-| Reproduce, test, review, and prove a change | `miso-tdd`, `miso-review`, `miso-verify` |
+| Design interfaces and compare alternatives | `miso-design` |
+| Maintain architecture and enforce recurring rules | `miso-garden` |
+| Repeat work with limits and resumable state | `miso-loop` |
+| Measure and improve performance | `miso-perf` |
+| Write a spec and divide it into tickets | `miso-spec`, `miso-tickets` |
+| Diagnose, test, review, and prove a change | `miso-debug`, `miso-tdd`, `miso-review`, `miso-verify` |
+| Resolve merge or rebase conflicts | `miso-merge` |
 | Write tutorials, guides, and reference material | `miso-docs` |
 | Coordinate work and preserve decisions | `miso-plan`, `miso-swarm`, `miso-trail` |
 | Create, evaluate, and improve skills | `miso-author`, `miso-eval`, `miso-reflect` |
@@ -137,6 +173,9 @@ The guides explain the method through practical tasks:
 1. **[Give the agent a way to prove its work](docs/guides/01-verification.md).** Build app controls, map features, and retain useful evidence.
 2. **[Understand the problem, then test the design](docs/guides/02-research-and-design.md).** Investigate intent, design from usage, and compare prototypes.
 3. **[Run larger work without losing control](docs/guides/03-long-running-work.md).** Define completion, track dependencies, and resume from verified state.
+4. **[Make good changes easier to make](docs/guides/04-codebase-gardening.md).** Find recurring problems and prevent them with types, boundaries, and executable checks.
+
+For measured optimization, use [Improve performance with evidence](docs/how-to/improve-performance.md). For a bounded work loop, state the acceptance checks and an iteration or time limit. Loops execute within the active session; they do not install a background service.
 
 For exact commands, use the [CLI reference](docs/reference/cli.md). For the shared rules and implementation boundaries, read [architecture and authority](docs/explanation/architecture.md).
 
@@ -150,7 +189,9 @@ For exact commands, use the [CLI reference](docs/reference/cli.md). For the shar
 
 ## What has been tested
 
-The local suite has **28 passing helper and packaging tests**. Initial agent qualification covered **12 behavioral cases across all 16 skills** and **24 correct routing cases**. All four harnesses loaded MisoStack and completed a repair in separate sandbox fixtures.
+The local suite has **38 passing helper and packaging tests**. The installer test permits only its temporary tarball to run its setup hook. The [installation guide](docs/how-to/install.md#install-without-the-npm-prompt) covers manual setup and npm script permission.
+
+Initial agent qualification covered **12 behavioral cases across all 16 skills** and **24 correct routing cases**. All four harnesses loaded MisoStack and completed a repair in separate sandbox fixtures.
 
 The complete behavioral set ran in Codex. The other harnesses ran loading and repair checks. These samples do not establish every workflow in every host. Native worker dispatch, production deployments, remote PR actions, and active schedulers still need project-specific verification.
 
@@ -166,12 +207,10 @@ python3 -m unittest discover -s tests -v
 python3 scripts/check_repository.py
 ```
 
-Use separate sandbox folders for agent evaluations. Keep raw host traces and credentials out of commits. Evidence stays local under the ignored `evidence/` directory. Git contains the test cases, scripts, and results summary.
+Use separate sandbox folders for agent evaluations. Keep raw host traces and credentials out of commits. Keep new evaluation artifacts in temporary folders. Git contains the test cases, scripts, and results summary.
 
-## Reference and license
-
-MisoStack is an original implementation informed by Lauren Tan's pstack guides. It adapts the ideas to four harnesses, shared source, default models, and Lucas's working rules.
-
-The [pstack comparison](docs/explanation/pstack-comparison.md) maps the reference capabilities and explains deliberate differences. The [provenance record](UPSTREAM.md) identifies the audited revision. No pstack code is vendored.
+## License
 
 Original work is licensed under [MIT](LICENSE). See [NOTICE](NOTICE) for attribution.
+
+Report vulnerabilities through the private channel in [the security policy](SECURITY.md).

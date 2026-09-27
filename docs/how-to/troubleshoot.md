@@ -1,5 +1,15 @@
 # Troubleshoot MisoStack
 
+## /miso is not recognized
+
+The shortcut depends on your host. Codex uses `$miso` or `/skills`. Claude Code uses `/miso-stack:miso`. Grok Build supports `/miso`. OpenCode loads the skill when you ask `Use miso to…`; MisoStack does not install a separate slash command there.
+
+Use [the invocation guide](use-miso.md#can-i-type-miso), then check discovery if the skill is still absent.
+
+## npm installs the package but shows no picker
+
+Run `miso-stack install` in your terminal. npm can skip the hook when scripts are disabled or require explicit approval. A warning mentioning `allowScripts` means npm blocked the hook. See [installation options](install.md#install-without-the-npm-prompt).
+
 ## The skill is absent
 
 Run the package check. Then inspect the host's discovered skills. A plugin install can be valid while a running session still has an old catalog. Start a fresh session.

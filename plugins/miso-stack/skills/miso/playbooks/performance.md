@@ -4,7 +4,7 @@ Use for: Fix a specific measured performance problem.
 
 ## Procedure
 
-1. Define the workload, metric, units, environment, and acceptable outcome.
+1. Use [miso-perf](../../miso-perf/SKILL.md). Define the workload, metric, units, environment, and acceptable outcome.
 2. Capture a repeatable baseline with warm-up and enough samples for the expected variance.
 3. Use profiles or traces to locate the mechanism. Avoid optimizing from source appearance alone.
 4. Change one meaningful variable. Keep the benchmark conditions comparable.
@@ -13,7 +13,7 @@ Use for: Fix a specific measured performance problem.
 
 ## Supporting skills
 
-[miso-research](../../miso-research/SKILL.md), [miso-verify](../../miso-verify/SKILL.md), [miso-review](../../miso-review/SKILL.md)
+[miso-perf](../../miso-perf/SKILL.md), [miso-verify](../../miso-verify/SKILL.md), [miso-review](../../miso-review/SKILL.md)
 
 ## Completion evidence
 

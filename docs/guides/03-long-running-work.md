@@ -18,6 +18,23 @@ The agent should inspect the current system before estimating the work. A risky 
 
 ## Give tasks a proof method
 
+For repeated implementation and checks, give the run explicit limits:
+
+```text
+Use miso to implement the approved parser spec in a bounded loop.
+Stop after five iterations or 20 minutes, whichever comes first.
+Keep state and evidence under .miso/parser-loop/.
+Complete only when every acceptance check passes.
+```
+
+Miso selects `miso-loop` and uses a plan when tasks have dependencies. Without supplied limits, the loop defaults to ten iterations and 30 minutes of active work. Failed attempts consume iterations. Two consecutive attempts without progress or new evidence stop the run as blocked.
+
+The loop saves the task, checks, consumed limits, evidence, next action, and status in `loop.json`. A limit or blocker is not completion. A completion phrase alone cannot prove that the work passed.
+
+To resume, ask `Use miso to resume the loop in .miso/parser-loop/.` The agent checks the current files and keeps the consumed limits. Give a new limit explicitly if the previous run exhausted its budget. To stop, say `Cancel this loop and preserve its evidence.`
+
+This loop runs in the active agent session. MisoStack does not install an automatic continuation hook or daemon. If the host ends the session, resume from its saved state. For scheduled work, use a separately authorized automation.
+
 Each task needs an outcome and a way to verify it. The task owner must know what result to return.
 
 ```sh
@@ -37,7 +54,7 @@ The checker rejects cycles and missing dependencies. It also checks accepted evi
 
 The helper does not launch agents. It is a task ledger. The coordinator uses the current harness's worker tools when they are available and permitted.
 
-Use `miso-swarm` for independent coverage or research. Use `miso-arena` when several candidates solve the same problem. Both need separate writable outputs and a lead that checks the results.
+Use `miso-swarm` for independent coverage or research. Use `miso-design` to compare candidate interfaces. Any parallel work needs separate writable outputs and a lead that checks the results.
 
 If the host has no worker tool, run the tasks serially. Report that difference. Do not create a repository merely to obtain worktrees.
 

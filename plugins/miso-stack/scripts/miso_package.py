@@ -49,6 +49,16 @@ def check():
     discovered = {p.parent.name for p in (ROOT / "skills").glob("*/SKILL.md")}
     if names != discovered:
         errors.append("Skill inventory does not match catalog.")
+    routing = data.get("routing", {})
+    routing_path = ROOT / routing.get("path", "")
+    if routing.get("entry") != data.get("entry") or not routing_path.is_file():
+        errors.append("Missing or invalid entry router.")
+    else:
+        destinations = {(routing_path.parent / link).resolve()
+                        for link in re.findall(r"\]\(([^)#]+)\)", routing_path.read_text())}
+        required = {(ROOT / item["path"]).resolve() for item in skills if item["name"] != data["entry"]}
+        if not required <= destinations:
+            errors.append("Entry router does not reach every supporting skill.")
     for item in skills:
         path = ROOT / item["path"]
         content = path.read_text()
