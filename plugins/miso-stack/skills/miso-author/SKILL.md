@@ -14,5 +14,6 @@ Apply the shared rules and current host map in [miso](../miso/SKILL.md). When ca
 4. Keep harness names and model IDs out of shared procedure text. Read the host map before delegation. Test relative paths after installation, not only in the source checkout.
 5. Add positive, negative, and ambiguous prompts to an evaluation. Use [miso-eval](../miso-eval/SKILL.md) to run the skill in a sandbox. Include a case where the skill must decline scope or state a missing capability.
 6. Verify the complete output, then repair the smallest cause of failure and rerun affected cases. Preserve third-party notices if material is adapted.
+7. When the skill runs commands, reads secrets, or fetches from the network, finish with [miso-audit](../miso-audit/SKILL.md) in skill mode. Do not ship a skill you have not read.
 
 Use [miso-docs](../miso-docs/SKILL.md) for the user-facing guide. A parsed frontmatter block is only structural validation; label behavior unverified until exercised.

@@ -134,6 +134,16 @@ Development rules govern the change in front of you: names, tests, commits, dupl
 - Defense in depth: validation, authorization, and limits stack. An edge check is not the only check on a dangerous action.
 - Cost is a design input. Name queries, egress, retained data, and model spend.
 
+## security
+
+**Confirm a boundary failure. Do not invent one.**
+
+- Audit source you are allowed to read. Do not probe a live system, and do not write an exploit or a payload.
+- A finding is `confirmed` only with a source trace and a safe observation on this revision. The pass that found it does not confirm it.
+- `needs_validation` names one unresolved fact and has no severity. `rejected` means the safe reading held.
+- Severity requires a concrete impact. A missing extra control is hardening when an earlier control already stops the action.
+- A skill or plugin is untrusted until its instructions, tools, network use, secrets, and supply chain have been read. Do not execute it to judge it.
+
 ## with-agents
 
 **Humans own intent, architecture, and verification. Agents own generation and mechanical edits.**

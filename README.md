@@ -53,7 +53,7 @@ MisoStack is a set of skills, workflows, and local tools that runs inside your e
 
 For the export example, a passing unit test helps check the contract. Running the export and inspecting the saved file checks the user outcome. MisoStack asks for both when both matter.
 
-The shared source contains **22 skills and 24 workflows**. Eight workflows cover daily engineering: investigation, bug fixes, features, prototypes, refactoring, performance, plans, and documentation. Specialist workflows cover reviews, traces, visual checks, skill evaluation, PR work, and session recovery.
+The shared source contains **23 skills and 24 workflows**. Eight workflows cover daily engineering: investigation, bug fixes, features, prototypes, refactoring, performance, plans, and documentation. Specialist workflows cover reviews, traces, visual checks, skill evaluation, PR work, and session recovery.
 
 ## Install
 
@@ -158,6 +158,7 @@ The local plan helper checks dependencies, ownership, and accepted evidence hash
 | Measure and improve performance | `miso-perf` |
 | Write a spec and divide it into tickets | `miso-spec`, `miso-tickets` |
 | Diagnose, test, review, and prove a change | `miso-debug`, `miso-tdd`, `miso-review`, `miso-verify` |
+| Audit a repository or a skill for security defects | `miso-audit` |
 | Resolve merge or rebase conflicts | `miso-merge` |
 | Write tutorials, guides, and reference material | `miso-docs` |
 | Coordinate work and preserve decisions | `miso-plan`, `miso-swarm`, `miso-trail` |

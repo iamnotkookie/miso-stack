@@ -69,7 +69,7 @@ Without a terminal, `miso-stack install` requires names or `--yes`. This prevent
 From a checkout, run `npm install -g .`. To test the exact publishable artifact, run `npm pack`, then install its tarball:
 
 ```sh
-npm install -g ./miso-stack-0.3.0.tgz
+npm install -g ./miso-stack-0.4.0.tgz
 ```
 
 Keep the global package installed. Shared links and local marketplaces need a stable source directory. Temporary `npx` installs are rejected for setup because clearing the npm cache would break those references. A local-directory npm installation can link to the checkout, so keep that checkout in place too.

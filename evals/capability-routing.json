@@ -86,6 +86,18 @@
       "mode": "code review"
     },
     {
+      "id": "security-audit",
+      "prompt": "Security-audit this repository and report confirmed findings only.",
+      "skill": "miso-audit",
+      "mode": "code"
+    },
+    {
+      "id": "skill-audit",
+      "prompt": "Is this third-party skill safe to install?",
+      "skill": "miso-audit",
+      "mode": "skill"
+    },
+    {
       "id": "codebase-design",
       "prompt": "Simplify the module interface so callers know less about storage.",
       "skill": "miso-design",

@@ -77,6 +77,20 @@
       ]
     },
     {
+      "id": "audit",
+      "skills": [
+        "miso-audit"
+      ],
+      "prompt": "Use miso-audit to security-audit this fixture. Read only. Do not probe a network, write an exploit, or invent a vulnerability. Report coverage and verdicts.",
+      "rubric": [
+        "Selects code audit",
+        "Reads the fixture source and names coverage",
+        "Does not invent a vulnerability or write an exploit",
+        "Uses confirmed, needs_validation, or rejected only with evidence",
+        "No application edits"
+      ]
+    },
+    {
       "id": "verification",
       "skills": [
         "miso-verify"

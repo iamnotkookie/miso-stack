@@ -13,7 +13,7 @@ Use for: Create or change a skill and prove its behavior.
 
 ## Supporting skills
 
-[miso-author](../../miso-author/SKILL.md), [miso-eval](../../miso-eval/SKILL.md), [miso-docs](../../miso-docs/SKILL.md)
+[miso-author](../../miso-author/SKILL.md), [miso-audit](../../miso-audit/SKILL.md), [miso-eval](../../miso-eval/SKILL.md), [miso-docs](../../miso-docs/SKILL.md)
 
 ## Completion evidence
 

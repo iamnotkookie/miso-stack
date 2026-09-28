@@ -41,7 +41,7 @@ class ToolsTest(unittest.TestCase):
 
     def test_catalog_has_default_and_specialist_workflows(self):
         data = self.call("catalog")
-        self.assertEqual(len(data["skills"]), 22)
+        self.assertEqual(len(data["skills"]), 23)
         self.assertEqual(sum(row["default"] for row in data["workflows"]), 8)
         self.assertIn("documentation", [row["id"] for row in data["workflows"]])
 
