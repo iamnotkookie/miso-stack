@@ -8,7 +8,7 @@ license: MIT
 
 Apply the shared rules and current host map in [miso](../miso/SKILL.md). When called directly, run this procedure after reading those rules. When called from a playbook, continue that playbook without restarting routing.
 
-Use existing project tools first. Select run, create, or maintain from the request. An agent claim of done is the same class of claim as a human one. If it cannot be verified, it does not ship. See [prove-it-works](../miso/references/principles.md).
+Use existing project tools first. Select run, create, or maintain from the request. An agent claim of done is the same class of claim as a human one. If it cannot be verified, it does not ship. A security claim uses the same rule. See [prove-it-works](../miso/references/principles.md) and [security](../miso/references/principles.md).
 
 ## Run
 

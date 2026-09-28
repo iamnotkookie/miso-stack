@@ -32,13 +32,13 @@ The runner closes the child's standard input. The task arrives only through the 
 
 Use `--case routing` to classify all 24 specialist and default scenarios in [routing.json](../../evals/routing.json). The model sees the requests but not their expected labels. This tests workflow selection; it does not execute those workflows.
 
-Use `--case capability-routing` for the 37 skill-and-mode scenarios in [capability-routing.json](../../evals/capability-routing.json). This covers every supporting skill. Expected skills and modes are withheld from the prompt. A single-purpose skill reports mode `default`.
+Use `--case capability-routing` for the 39 skill-and-mode scenarios in [capability-routing.json](../../evals/capability-routing.json). This covers every supporting skill. Expected skills and modes are withheld from the prompt. A single-purpose skill reports mode `default`.
 
 ```sh
 python3 scripts/run_evaluation.py --harness codex --case capability-routing --output /tmp/miso-capability-routing
 ```
 
-The `spec`, `tickets`, `review-boundary`, `comments`, and `merge-boundary` cases check artifact and scope behavior. The `garden` case checks read-only maintenance inspection. The `loop` and `loop-blocked` cases check verified completion and unavailable prerequisites. The `performance` case checks measurement without unauthorized optimization. The merge-boundary case uses a fixture without Git and must leave it unchanged. A positive merge test requires a separate disposable repository with known changes on both sides. Do not initialize Git in a real project to manufacture this test.
+The `spec`, `tickets`, `review-boundary`, `comments`, `merge-boundary`, and `audit` cases check artifact and scope behavior. The `garden` case checks read-only maintenance inspection. The `loop` and `loop-blocked` cases check verified completion and unavailable prerequisites. The `performance` case checks measurement without unauthorized optimization. The merge-boundary case uses a fixture without Git and must leave it unchanged. A positive merge test requires a separate disposable repository with known changes on both sides. Do not initialize Git in a real project to manufacture this test.
 
 The runner uses normal host account access. It creates no credentials. Grok uses its workspace sandbox. Codex uses its native sandbox. Claude and OpenCode retain their native permission handling; fixture-local rules allow the required local test operations. The fixture boundary is part of the test contract, not a claim that all four hosts provide identical OS isolation.
 

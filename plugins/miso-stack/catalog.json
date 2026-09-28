@@ -8,6 +8,11 @@
       "description": "Routes plain-language engineering requests to MisoStack skills and workflows. Use miso to investigate, design, specify, build, review, verify, or explain work without remembering sub-skill names."
     },
     {
+      "name": "miso-audit",
+      "path": "skills/miso-audit/SKILL.md",
+      "description": "Audits authorized source or a skill for security defects and confirms findings independently. Use for a repository security audit or for checking a skill before install."
+    },
+    {
       "name": "miso-author",
       "path": "skills/miso-author/SKILL.md",
       "description": "Creates or improves compact skills from stated requirements and evaluated examples. Use for skill authoring or capturing an explicitly stated working preference."
@@ -273,6 +278,7 @@
       "path": "skills/miso/playbooks/authoring-a-skill.md",
       "skills": [
         "miso-author",
+        "miso-audit",
         "miso-eval",
         "miso-docs"
       ],

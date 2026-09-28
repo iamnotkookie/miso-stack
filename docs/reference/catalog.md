@@ -7,6 +7,7 @@ Start with `miso` and describe the task. [The router](../../plugins/miso-stack/s
 | Skill | Purpose |
 | --- | --- |
 | [miso](../../plugins/miso-stack/skills/miso/SKILL.md) | Routes plain-language engineering requests to MisoStack skills and workflows. Use miso to investigate, design, specify, build, review, verify, or explain work without remembering sub-skill names. |
+| [miso-audit](../../plugins/miso-stack/skills/miso-audit/SKILL.md) | Audits authorized source or a skill for security defects and confirms findings independently. Use for a repository security audit or for checking a skill before install. |
 | [miso-author](../../plugins/miso-stack/skills/miso-author/SKILL.md) | Creates or improves compact skills from stated requirements and evaluated examples. Use for skill authoring or capturing an explicitly stated working preference. |
 | [miso-automate](../../plugins/miso-stack/skills/miso-automate/SKILL.md) | Designs bounded engineering routines and handles issue reports with reproduction evidence. Use when drafting a recurring check, triaging a report, or automating a proven workflow. |
 | [miso-debug](../../plugins/miso-stack/skills/miso-debug/SKILL.md) | Diagnoses bugs and performance regressions with a reproducible failure and controlled experiments. Use for broken, intermittent, or unexpectedly slow behavior. |

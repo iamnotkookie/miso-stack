@@ -76,7 +76,7 @@ class InstallerTest(unittest.TestCase):
     def test_detect_install_and_repeat_keep_links_and_marketplaces(self):
         self.invoke()
         target = self.home / ".agents/skills"
-        self.assertEqual(len(list(target.glob("miso*/SKILL.md"))), 22)
+        self.assertEqual(len(list(target.glob("miso*/SKILL.md"))), 23)
         self.invoke()
         adds = [c for c in self.calls() if c[1:4] == ["plugin", "marketplace", "add"]]
         self.assertEqual(len(adds), 2)

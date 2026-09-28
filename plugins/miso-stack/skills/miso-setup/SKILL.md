@@ -14,7 +14,7 @@ Apply the shared rules and current host map in [miso](../miso/SKILL.md). When ca
 4. Use the local marketplace for Claude Code and Codex. Follow the repository installation guide. Start a fresh session after installing.
 5. Check whether project instructions already define models. Follow supported settings. Otherwise omit model overrides. Do not change the user's global model preference.
 6. Invoke `miso` on a bounded read-only task. Confirm the matching playbook and host map were read. Confirm a startup hook separately where supported and trusted.
-7. Report discovery, load, routing, and delegation as separate observations. An installed manifest is not proof of any of them.
+7. Report discovery, load, routing, and delegation as separate observations. An installed manifest is not proof of any of them. Before relying on a third-party skill, audit it with [miso-audit](../miso-audit/SKILL.md).
 
 If a host requires hook trust, leave that choice to its user interface. Explicit skill invocation remains available without the hook.
 

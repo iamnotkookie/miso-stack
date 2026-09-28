@@ -42,6 +42,7 @@ For an explicitly requested specialist task, select its entry in [the workflow i
 - Use [miso-design](../miso-design/SKILL.md) before committing to a substantial new interface. Resolve measurable uncertainty with a small experiment.
 - Use [miso-verify](../miso-verify/SKILL.md) to define and run proof on the user's surface. A compiler result does not prove a user journey.
 - Use [miso-review](../miso-review/SKILL.md) before handing over substantial changes. Check the artifact yourself after delegated work.
+- Use [miso-audit](../miso-audit/SKILL.md) for a repository security audit or a skill-install check. A review of one change stays in miso-review.
 - Use [miso-garden](../miso-garden/SKILL.md) for recurring structural drift, [miso-perf](../miso-perf/SKILL.md) for measured performance work, and [miso-loop](../miso-loop/SKILL.md) for bounded repeated attempts. Use only the procedure the task needs.
 - Use [miso-docs](../miso-docs/SKILL.md) for documents and [miso-trail](../miso-trail/SKILL.md) for long or unattended work.
 - Delegate only when the session permits it and independent work justifies it. Read [delegation](references/delegation.md) before spawning. Missing worker tools mean serial execution, not invented cloud agents.
