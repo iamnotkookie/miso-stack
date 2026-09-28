@@ -11,7 +11,7 @@ Apply the shared rules and current host map in [miso](../miso/SKILL.md). When ca
 1. State an observable final result. Ground the scope in current files and runtime evidence. Resolve the highest-risk unknown with an experiment before expanding the plan.
 2. Break work into small units. Each task needs an ID, outcome, dependencies, owner, verification method, and evidence. Define review or external-action gates explicitly.
 3. Use the bundled plan format and CLI described in [the plan contract](../miso/references/plan.md). Run `plan check` before execution. A cycle or missing dependency blocks the plan.
-4. Use `plan next` to find ready work. Claim a task with `plan start`. Give one owner each mutable artifact. Delegation follows the host map and [delegation](../miso/references/delegation.md).
+4. Use `plan next` to find ready work. Claim a task with `plan start`. Give one owner each mutable artifact. Parallel independent units are a swarm: follow [miso-swarm](../miso-swarm/SKILL.md). Do not keep a second ownership protocol. The worker that wrote a unit does not approve it. Delegation follows the host map and [delegation](../miso/references/delegation.md).
 5. Implement one unit, run its verification, and save evidence before `plan finish`. The CLI records an artifact hash; the lead still judges whether the artifact proves the task.
 6. Record blockers and experiments in the trail. Continue independent ready work when one task is blocked. Do not repeatedly retry the same failure without new evidence.
 7. Verify the whole result after its parts pass. A plan with all tasks done is not a substitute for integration proof. Keep a resumable handoff if the environment prevents completion.
