@@ -8,7 +8,7 @@ license: MIT
 
 Apply the shared rules and current host map in [miso](../miso/SKILL.md). When called directly, run this procedure after reading those rules. When called from a playbook, continue that playbook without restarting routing.
 
-1. Identify the reader, their task, and their starting knowledge from the request and repository.
+1. Identify the reader, their task, and their starting knowledge from the request and repository. A spec or a decision record states why. A comment that restates the code does not. Update the doc in the same change as the behavior.
 2. Choose one document purpose. A tutorial teaches through a working example. A how-to solves a known task. A reference lists exact contracts. An explanation develops the reasons and tradeoffs. Split mixed purposes into linked pages.
 3. Read the actual implementation and execute relevant commands before describing behavior. Distinguish supported behavior from a proposal.
 4. Write the outcome first. Give prerequisites before steps. Use real paths and runnable commands. Explain the expected result and recovery for likely failures. Keep credentials out of examples.

@@ -101,3 +101,58 @@ Choose data structures from actual access patterns and invariants. Similar state
 ## encode-lessons-in-structure
 
 **Prevent repeat failures.** Prefer a schema, test, lint, or better tool when it can enforce a recurring lesson.
+
+## structure
+
+**Shape the code so the next change stays local.** Apply the rule the change actually breaks.
+
+- **DRY.** One business rule has one representation. Two copies will disagree.
+- **KISS.** A reader follows the change without a tour. Clever loses to clear.
+- **YAGNI.** Build the behavior a current requirement or a current failing test names.
+- **Single responsibility.** A module changes for one reason.
+- **Open-closed.** Extend a tested seam. Do not reopen it for a case the seam already absorbs.
+- **Substitution.** A subtype honors the parent contract. An override that changes the contract is a new type.
+- **Interface segregation.** A caller depends only on the operations it uses.
+- **Dependency inversion.** Domain code depends on an abstraction. The concrete client, database, or clock is injected at the edge.
+- **Encapsulation.** State stays private. Callers see the contract.
+- **Separation of concerns.** UI, domain, and storage do not share a module.
+- **Loose coupling, high cohesion.** Neighbors talk through contracts. Related code sits together.
+- **Modularity and abstraction.** A part can be replaced. Hide what changes. Expose what is stable.
+- **The seven system rules.** Abstraction, modularity, anticipation of change, separation of concerns, generality, incrementality, and reliability. Generality waits for the second real case. Incrementality means a thin slice with a check. Reliability means a named failure, a retry budget with jitter and a stop, and backpressure on a stream.
+
+Development rules govern the change in front of you: names, tests, commits, duplication. Engineering rules govern the system for years: boundaries, failure, and cost. A tidy diff can still rot the system.
+
+## production
+
+**Bound the work and make the effect single.**
+
+- A retried write, payment, or export is idempotent. The second call does not double the effect.
+- Fan-out, exports, queries, and token use have a budget. Unbounded work is a defect.
+- The dependency graph is data: lockfile, manifest, or call graph. Blast radius comes from that graph.
+- A pipeline has stages with contracts. Retrieve, rank, and present do not share one function.
+- One store owns a fact. Caches say they are derived.
+- Defense in depth: validation, authorization, and limits stack. An edge check is not the only check on a dangerous action.
+- Cost is a design input. Name queries, egress, retained data, and model spend.
+
+## with-agents
+
+**Humans own intent, architecture, and verification. Agents own generation and mechanical edits.**
+
+- The spec, the acceptance criteria, or the failing test is the source of truth. The diff is a projection of that source.
+- Context files are code. Keep them short. Add a rule after the same mistake repeats.
+- The writer of a change does not approve it. Review runs in a fresh context against the spec and the artifact.
+- A constraint is a gate, not a paragraph asking for care.
+- Agent output is untrusted until the same gates a human change must pass are green on that revision.
+- Use the tool that fits the job, including a non-model tool. Buy a commodity system when running a homegrown one costs more than renting it.
+- Measure defects, revert rate, and time to a verified change. Do not score token use or "used an agent."
+- Commit a verified slice the author can explain. Do not land a commit nobody can describe.
+
+## refuse-these
+
+- "Clean it up later." Later does not arrive. Fix it here or file an owned follow-up.
+- "More people will make it faster." A tangled system gets slower as the team grows.
+- "Working code needs no why." Record the non-obvious constraint. Skip a comment that restates the line.
+- "If it works, do not touch it." Working code that cannot be changed safely is a liability. Change it in a verified slice.
+- "More code is more progress." Deletion counts.
+
+Good software is maintainable by someone who did not write it, dependable in a named way, inside its stated budget, and usable on the empty and error paths. Maintenance costs more than the first build. Design for the second change.
