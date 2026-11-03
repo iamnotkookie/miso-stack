@@ -35,7 +35,9 @@ def command(host, prompt, fixture, smoke):
 def run(args):
     output = Path(args.output).resolve()
     output.mkdir(parents=True, exist_ok=False)
-    fixture = create(output / "fixture")
+    cases = json.loads((ROOT / "evals/cases.json").read_text())["cases"]
+    case = next((case for case in cases if case["id"] == args.case), None)
+    fixture = create(output / "fixture", review=bool(case and case.get("planted_change")))
     if args.harness == "opencode":
         skills = [p.name for p in (ROOT / "plugins/miso-stack/skills").iterdir() if p.is_dir()]
         allowed = {str(Path.home() / ".agents/skills" / name) + "/**": "allow" for name in skills}
@@ -44,8 +46,6 @@ def run(args):
         settings = {"permission": {"external_directory": allowed, "bash": shell,
                                    "edit": {"*": "deny", str(fixture) + "/**": "allow"}, "task": "deny"}}
         (fixture / "opencode.json").write_text(json.dumps(settings, indent=2) + "\n")
-    cases = json.loads((ROOT / "evals/cases.json").read_text())["cases"]
-    case = next((case for case in cases if case["id"] == args.case), None)
     if args.case not in {"smoke", "routing", "capability-routing"} and case is None:
         raise ValueError("Unknown evaluation case.")
     if args.case in {"routing", "capability-routing"}:

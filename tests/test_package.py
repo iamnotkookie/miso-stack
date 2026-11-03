@@ -139,7 +139,16 @@ class PackageTest(unittest.TestCase):
     def test_package_rejects_an_orphaned_reference(self):
         result = self.package_check_after(lambda target: (target / "skills/miso-review/references/extra.md").write_text("# Extra\n"))
         self.assertNotEqual(result.returncode, 0)
-        self.assertIn("references/extra.md: nothing links", result.stderr)
+        self.assertIn("references/extra.md: no skill reaches", result.stderr)
+
+    def test_package_rejects_references_that_only_link_each_other(self):
+        def edit(target):
+            references = target / "skills/miso-review/references"
+            (references / "one.md").write_text("[two](two.md)\n")
+            (references / "two.md").write_text("[one](one.md)\n")
+        result = self.package_check_after(edit)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("references/one.md: no skill reaches", result.stderr)
 
     def test_review_skill_names_both_change_types(self):
         catalog = json.loads((PLUGIN / "catalog.json").read_text())
@@ -150,9 +159,23 @@ class PackageTest(unittest.TestCase):
     def test_review_fixture_diff_applies_to_the_fixture(self):
         with tempfile.TemporaryDirectory() as directory:
             target = Path(directory) / "fixture"
-            subprocess.run([sys.executable, str(ROOT / "scripts/create_sandbox.py"), str(target)], capture_output=True, check=True)
+            subprocess.run([sys.executable, str(ROOT / "scripts/create_sandbox.py"), "--review", str(target)], capture_output=True, check=True)
             result = subprocess.run(["git", "apply", "--check", "changes/review.diff"], cwd=target, capture_output=True, text=True)
             self.assertEqual(result.returncode, 0, result.stderr)
+
+    def test_only_the_review_case_gets_the_planted_change(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            host = root / "codex"
+            host.write_text("#!/bin/sh\nexit 0\n")
+            host.chmod(0o755)
+            found = {}
+            for case in ["bug-fix", "audit", "review-planted"]:
+                output = root / case
+                subprocess.run([sys.executable, str(ROOT / "scripts/run_evaluation.py"), "--harness", "codex", "--case", case, "--output", str(output)],
+                               capture_output=True, check=True, env={**os.environ, "PATH": str(root) + os.pathsep + os.environ["PATH"]})
+                found[case] = (output / "fixture/changes/review.diff").exists()
+            self.assertEqual(found, {"bug-fix": False, "audit": False, "review-planted": True})
 
     def test_package_rejects_a_long_dash_in_a_skill(self):
         def edit(target):

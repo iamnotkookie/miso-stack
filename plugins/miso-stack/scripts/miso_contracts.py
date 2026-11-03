@@ -65,14 +65,17 @@ def prose_errors(root):
 
 
 def reference_errors(root):
-    errors = []
-    documents = sorted((root / "skills").rglob("*.md"))
-    linked = {(path.parent / link).resolve() for path in documents
-              for link in re.findall(r"\]\(([^)#]+)", path.read_text()) if not re.match(r"[a-z]+://", link)}
-    for path in documents:
-        if path.parent.name == "references" and path.resolve() not in linked:
-            errors.append(f"{path.relative_to(root)}: nothing links to this reference, so no agent will read it.")
-    return errors
+    reachable = set()
+    pending = [path.resolve() for path in (root / "skills").glob("*/SKILL.md")]
+    while pending:
+        path = pending.pop()
+        if path in reachable or path.suffix != ".md" or not path.is_file():
+            continue
+        reachable.add(path)
+        pending += [(path.parent / link).resolve() for link in re.findall(r"\]\(([^)#]+)", path.read_text())
+                    if not re.match(r"[a-z]+://", link)]
+    return [f"{path.relative_to(root)}: no skill reaches this reference, so no agent will read it."
+            for path in sorted((root / "skills").rglob("references/*.md")) if path.resolve() not in reachable]
 
 
 def errors(root, catalog):

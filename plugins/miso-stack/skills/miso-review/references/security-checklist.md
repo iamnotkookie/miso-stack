@@ -15,7 +15,7 @@ A confirmed finding in this file makes the verdict `request changes`. Give the e
 ## Check each time
 
 - **Dependencies.** Provenance, maintainer, install scripts, lockfile integrity, and pinning.
-- **CI and release.** Untrusted input in a run step, secrets reachable from forks, a privileged trigger that runs contributed code, and write-scoped tokens.
+- **CI and release.** Untrusted input in a run step, secrets reachable from forks, a privileged trigger that runs contributed code, write-scoped tokens, and actions pinned by a movable tag.
 - **Cryptography.** Homemade primitives, ECB mode, a fixed initialization vector, comparisons that are not constant-time, and weak randomness for tokens.
 - **Data exposure.** Personal data in logs or errors, API responses that return too much, and cached private data.
 - **Infrastructure.** Public storage, open ingress, disabled certificate checks, and containers that run as root or in privileged mode.

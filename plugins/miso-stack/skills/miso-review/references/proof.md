@@ -5,10 +5,8 @@ A risky-looking change is usually safe because of one thing. Name that thing, an
 | Grade | What you have |
 | --- | --- |
 | Claimed | Someone said so. This alone proves nothing. |
-| Located | You opened the `file:line`, or the dependency source at its pinned version. |
-| Reasoned | You followed the failing path step by step and showed where it stops. |
-| Ran | A short probe exercises the real code and would fail if the claim were false. |
-| Observed | You saw the behavior in the running application. |
+| Read | You opened the source, including a dependency at its pinned version, and followed the path. |
+| Ran | You executed the real code or application and saw the result. |
 
 - Run probes in a scratch copy, never in the reviewed tree.
 - A problem that needs some future change before it matters is not a finding.
