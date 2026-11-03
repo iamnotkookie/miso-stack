@@ -190,7 +190,7 @@ For exact commands, use the [CLI reference](docs/reference/cli.md). For the shar
 
 ## What has been tested
 
-The local suite has **38 passing helper and packaging tests**. The installer test permits only its temporary tarball to run its setup hook. The [installation guide](docs/how-to/install.md#install-without-the-npm-prompt) covers manual setup and npm script permission.
+The local suite covers the helpers, packaging, and the content contracts. The installer test permits only its temporary tarball to run its setup hook. The [installation guide](docs/how-to/install.md#install-without-the-npm-prompt) covers manual setup and npm script permission.
 
 Initial agent qualification covered **12 behavioral cases across all 16 skills** and **24 correct routing cases**. All four harnesses loaded MisoStack and completed a repair in separate sandbox fixtures.
 

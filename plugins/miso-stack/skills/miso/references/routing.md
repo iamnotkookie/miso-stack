@@ -17,6 +17,7 @@ For a routing evaluation, return the skill name and the mode named after the lin
 | Compare alternative designs or implementations | [miso-design](../../miso-design/SKILL.md) |
 | Tend recurring code smells, duplicate helpers, or architecture drift | [miso-garden](../../miso-garden/SKILL.md), inspect |
 | Enforce structural rules or install anti-slop lint checks | [miso-garden](../../miso-garden/SKILL.md), enforce |
+| Make a recurring agent mistake impossible or caught automatically | [miso-garden](../../miso-garden/SKILL.md), correct |
 | Repeat build/check/fix work, resume a loop, or cancel it | [miso-loop](../../miso-loop/SKILL.md) |
 | Measure or improve latency, throughput, memory, or startup | [miso-perf](../../miso-perf/SKILL.md) |
 | Diagnose broken, intermittent, or slow behavior | [miso-debug](../../miso-debug/SKILL.md) |

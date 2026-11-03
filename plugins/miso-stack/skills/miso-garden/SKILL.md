@@ -1,6 +1,6 @@
 ---
 name: miso-garden
-description: "Maintains codebase structure and turns recurring defects into enforced constraints. Use for codebase gardening, repeated helpers, growing suppressions, architecture drift, or installing anti-slop checks."
+description: "Maintains codebase structure and turns recurring defects and repeated corrections into enforced constraints. Use for codebase gardening, repeated helpers, growing suppressions, architecture drift, repeated agent mistakes, or installing anti-slop checks."
 license: MIT
 ---
 
@@ -23,5 +23,18 @@ For requested cleanup, use [enforced architecture](references/constraints.md). R
 Run the existing baseline first. Demonstrate that the new check rejects an actual violation and accepts a valid example. Repair the authorized callers, run the relevant checks, and prove caller behavior still works. Keep existing failures visible. Do not make a gate pass by deleting tests, widening ignores, adding casts, or suppressing diagnostics.
 
 For an explicit anti-slop installation or update, read [lint setup](references/lint-setup.md). Ordinary gardening should reuse the project's tools, not replace its stack or install a new linter by default.
+
+## Correct
+
+Use this when one kind of correction keeps coming back, or when the user asks to end a repeated failure.
+
+1. Within the authorized scope, collect evidence from history: commits, reverted changes, review threads, and comments that describe workarounds. Sort it into kinds of mistake. A kind qualifies after two occurrences, each with evidence.
+2. Start with the kind that occurs most. Pick the strongest option that holds: a design that rules it out, a type, an automated check whose message names the remedy, or a test. Prose comes last, because skipping it causes no failure. Relying on a reviewer is not an option.
+3. Show the new check failing on the actual earlier mistake and passing on today's code. When commits are authorized, give each kind its own commit.
+4. Remove the instruction that the check replaces. In the agent instruction file, keep a short table of each remaining rule and its enforcement, so that a rule with no enforcement is easy to see.
+
+For each kind, report the evidence, the option you chose, and why no stronger option worked.
+
+## Deliver
 
 Deliver the observed pattern, completed repair, enforced rule, executed proof, and remaining findings. For recurring PR monitoring, prove a manual pass first, then use [miso-automate](../miso-automate/SKILL.md) for an authorized schedule with a watermark, duplicate handling, owner, limits, and disable path. Report inactive automation honestly.

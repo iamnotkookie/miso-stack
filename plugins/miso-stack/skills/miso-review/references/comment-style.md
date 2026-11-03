@@ -20,7 +20,7 @@ A pattern that shows up more than three times gets three examples and one reques
 
 ## Summary on the change
 
-Post one short summary before the chat reply when the user pointed at a pull request or merge request:
+When publishing is authorized, post one short summary before the chat reply:
 
 - Tip SHA and one-line intent.
 - Verdict: `approve`, `request changes`, or `hold merge`. State that the review does not merge.
