@@ -20,3 +20,7 @@ Use for: Resolve CI failures, review findings, or conflicts on an existing PR.
 Readiness is established for the current PR revision; merge remains a separate action.
 
 For an in-progress merge or rebase conflict, use [miso-merge](../../miso-merge/SKILL.md). Keep conflict resolution distinct from permission to merge or publish the PR.
+
+## Reply
+
+State the head revision, the status of each gate, and what you fixed. Give a reason for each dismissed finding.

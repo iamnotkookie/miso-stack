@@ -18,3 +18,7 @@ Use for: Create or change a skill and prove its behavior.
 ## Completion evidence
 
 The skill loads and produces the intended behavior on representative sandbox cases.
+
+## Reply
+
+State the skill's trigger, the cases you ran, and their results. Label untested behavior as unverified.

@@ -18,3 +18,7 @@ Use for: Split a multi-phase change into dependent, checkable units.
 ## Completion evidence
 
 The plan is valid and each completed task has evidence; the final integration is checked separately.
+
+## Reply
+
+State the unit order, each unit's check, and the first unit that is ready. Name the assumption most likely to change the plan.

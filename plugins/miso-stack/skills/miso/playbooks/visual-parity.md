@@ -18,3 +18,7 @@ Use for: Compare two UI implementations under matched conditions.
 ## Completion evidence
 
 The agreed state matrix matches the baseline within declared tolerances.
+
+## Reply
+
+State the matched conditions, the compared states, and each difference found. Attach the images.

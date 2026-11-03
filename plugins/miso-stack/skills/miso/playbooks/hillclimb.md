@@ -18,3 +18,7 @@ Use for: Run a bounded series of measured experiments.
 ## Completion evidence
 
 Each accepted experiment has comparable measurements and the final result passes correctness checks.
+
+## Reply
+
+State the metric before and after, with its unit, the accepted and rejected experiments, and why you stopped.

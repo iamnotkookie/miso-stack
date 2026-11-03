@@ -4,6 +4,7 @@ import re
 
 LEAF = re.compile(r"# .+\n\n\*\*Apply when:\*\* .+\n\n\*\*Rule:\*\* .+\n\n\*\*Why:\*\* .+\n\n- ")
 MAX_LEAF_WORDS = 250
+PLAYBOOK_SECTIONS = ["Procedure", "Supporting skills", "Completion evidence", "Reply"]
 
 
 def principle_errors(root):
@@ -33,5 +34,35 @@ def principle_errors(root):
     return errors
 
 
-def errors(root):
-    return principle_errors(root)
+def playbook_errors(root, catalog):
+    errors = []
+    for workflow in catalog["workflows"]:
+        path = root / workflow["path"]
+        if not path.is_file():
+            continue
+        content = path.read_text()
+        name = path.name
+        if not re.match(r"# .+\n\nUse for: ", content):
+            errors.append(f"playbooks/{name}: start with a title and a Use for line.")
+        if "Use for: " + workflow["trigger"] + "\n" not in content:
+            errors.append(f"playbooks/{name}: Use for differs from the catalog trigger.")
+        headings = re.findall(r"^## (.+)$", content, re.M)
+        if headings != PLAYBOOK_SECTIONS:
+            errors.append(f"playbooks/{name}: sections must be {', '.join(PLAYBOOK_SECTIONS)}.")
+        elif workflow["proof"] not in content:
+            errors.append(f"playbooks/{name}: Completion evidence differs from the catalog proof.")
+        elif not content.split("## Reply")[1].strip():
+            errors.append(f"playbooks/{name}: Reply must say what the agent reports.")
+    return errors
+
+
+def prose_errors(root):
+    errors = []
+    for path in sorted((root / "skills").rglob("*.md")):
+        if "\u2014" in path.read_text():
+            errors.append(f"{path.relative_to(root)}: has a long dash. Write two sentences.")
+    return errors
+
+
+def errors(root, catalog):
+    return principle_errors(root) + playbook_errors(root, catalog) + prose_errors(root)

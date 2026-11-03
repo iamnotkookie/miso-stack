@@ -18,3 +18,7 @@ Use for: Explain a profile, trace, heap snapshot, or crash artifact.
 ## Completion evidence
 
 The diagnosis points to concrete trace events and states capture limitations.
+
+## Reply
+
+State what the artifact shows, with its location in the trace, and what it cannot show.

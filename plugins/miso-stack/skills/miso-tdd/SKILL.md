@@ -14,5 +14,6 @@ Apply the shared rules and current host map in [miso](../miso/SKILL.md). When ca
 4. Make the smallest implementation change that passes the behavioral test.
 5. Run the test, then the relevant existing suite. Refactor only while checks stay green. Refactor is where DRY, KISS, and a single responsibility land. Red and green add nothing the current test does not demand. See [structure](../miso/references/principles/structure.md).
 6. Use [verification](../miso-verify/SKILL.md) for the reported user path when the unit test cannot cover it.
+7. When commits are authorized, commit the regression test first, while it fails, and the repair directly after it, so the history shows red, then green.
 
 If the test path is unavailable, record the reason and use a reproducible runtime experiment. Do not present that as a completed red-green cycle. Avoid new tests for trivial prose edits or tests that only assert source spelling.

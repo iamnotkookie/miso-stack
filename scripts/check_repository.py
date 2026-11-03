@@ -29,8 +29,15 @@ def version_failures():
             for name, version in found.items() if version != owner]
 
 
+def count_failures():
+    catalog = json.loads((ROOT / "plugins/miso-stack/catalog.json").read_text())
+    claim = f"{len(catalog['skills'])} skills and {len(catalog['workflows'])} workflows"
+    stated = re.search(r"(?<![0-9])" + claim, (ROOT / "README.md").read_text())
+    return [] if stated else [f"README.md: must state the catalog counts, {claim}"]
+
+
 def check():
-    failures = version_failures()
+    failures = version_failures() + count_failures()
     paths = list(source_files())
     for path in (p for p in paths if p.suffix == ".py"):
         ast.parse(path.read_text(), filename=str(path))
