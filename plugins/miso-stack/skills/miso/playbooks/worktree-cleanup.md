@@ -18,3 +18,7 @@ Use for: Inspect worktrees or simulator resources before approved cleanup.
 ## Completion evidence
 
 The candidate list is justified; any deletion has scoped approval and a verified outcome.
+
+## Reply
+
+List each resource with its owner and proposed action. State what you removed under approval and what you kept.

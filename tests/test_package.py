@@ -102,6 +102,59 @@ class PackageTest(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("miso-tdd/SKILL.md", result.stderr)
 
+    def test_package_rejects_a_playbook_without_a_reply(self):
+        def edit(target):
+            playbook = target / "skills/miso/playbooks/bug-fix.md"
+            playbook.write_text(playbook.read_text().split("## Reply")[0])
+        result = self.package_check_after(edit)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("playbooks/bug-fix.md: sections must be", result.stderr)
+
+    def test_package_rejects_a_playbook_that_drifts_from_the_catalog(self):
+        def edit(target):
+            playbook = target / "skills/miso/playbooks/feature.md"
+            playbook.write_text(playbook.read_text().replace("Use for: Add or change", "Use for: Change"))
+        result = self.package_check_after(edit)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("Use for differs from the catalog trigger", result.stderr)
+
+    def test_package_rejects_a_playbook_whose_proof_drifts(self):
+        def edit(target):
+            catalog = target / "catalog.json"
+            data = json.loads(catalog.read_text())
+            next(row for row in data["workflows"] if row["id"] == "feature")["proof"] = "Something else."
+            catalog.write_text(json.dumps(data))
+        result = self.package_check_after(edit)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("playbooks/feature.md: Completion evidence differs", result.stderr)
+
+    def test_package_rejects_an_empty_reply(self):
+        def edit(target):
+            playbook = target / "skills/miso/playbooks/bug-fix.md"
+            playbook.write_text(playbook.read_text().split("## Reply")[0] + "## Reply\n\n")
+        result = self.package_check_after(edit)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("playbooks/bug-fix.md: Reply must say", result.stderr)
+
+    def test_package_rejects_a_long_dash_in_a_skill(self):
+        def edit(target):
+            skill = target / "skills/miso-tdd/SKILL.md"
+            skill.write_text(skill.read_text() + "\nOne thought \u2014 another thought.\n")
+        result = self.package_check_after(edit)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("has a long dash", result.stderr)
+
+    def test_repository_check_rejects_stale_readme_counts(self):
+        with tempfile.TemporaryDirectory() as directory:
+            target = self.repository_check_copy(directory)
+            catalog = json.loads((target / "plugins/miso-stack/catalog.json").read_text())
+            current = f"{len(catalog['skills'])} skills"
+            for stale in ["16 skills and 24 workflows", "1" + current + " and 24 workflows"]:
+                with self.subTest(stale):
+                    (target / "README.md").write_text(stale + "\n")
+                    result = subprocess.run([sys.executable, str(target / "scripts/check_repository.py")], capture_output=True, text=True)
+                    self.assertNotEqual(result.returncode, 0)
+                    self.assertIn("catalog counts", result.stdout)
     def overlap(self, upstream_text):
         with tempfile.TemporaryDirectory() as directory:
             (Path(directory) / "skill.md").write_text(upstream_text)
@@ -178,12 +231,14 @@ class PackageTest(unittest.TestCase):
 
     def repository_check_copy(self, directory):
         target = Path(directory) / "repo"
-        for name in ["package.json", "scripts/check_repository.py", ".claude-plugin/marketplace.json",
+        for name in ["package.json", "plugins/miso-stack/catalog.json", "scripts/check_repository.py", ".claude-plugin/marketplace.json",
                      ".grok-plugin/marketplace.json", ".agents/plugins/marketplace.json",
                      "plugins/miso-stack/.claude-plugin/plugin.json", "plugins/miso-stack/.codex-plugin/plugin.json",
                      "plugins/miso-stack/.grok-plugin/plugin.json"]:
             (target / name).parent.mkdir(parents=True, exist_ok=True)
             shutil.copy(ROOT / name, target / name)
+        catalog = json.loads((target / "plugins/miso-stack/catalog.json").read_text())
+        (target / "README.md").write_text(f"{len(catalog['skills'])} skills and {len(catalog['workflows'])} workflows\n")
         return target
 
     def test_repository_check_accepts_matching_versions(self):

@@ -18,3 +18,7 @@ Use for: Verify a release or merge candidate before an authorized external actio
 ## Completion evidence
 
 The exact candidate is verified and the remote outcome is confirmed only if an authorized action ran.
+
+## Reply
+
+State the revision, the independent verification, and the authorized action you took or the approval you still need.

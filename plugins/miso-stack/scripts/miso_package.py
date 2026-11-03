@@ -84,7 +84,7 @@ def check():
             dest = (path.parent / link.split("#")[0]).resolve()
             if not dest.is_relative_to(ROOT) or not dest.exists():
                 errors.append(f"Broken or escaping link in {path.relative_to(ROOT)}: {link}")
-    errors += miso_contracts.errors(ROOT)
+    errors += miso_contracts.errors(ROOT, data)
     require(not errors, "Package check failed:\n" + "\n".join(errors))
     return {"valid": True, "skills": len(skills), "workflows": len(data["workflows"])}
 

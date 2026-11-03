@@ -18,3 +18,7 @@ Use for: Investigate leaks, CPU use, or intermittent behavior without assuming a
 ## Completion evidence
 
 Captured runtime observations support the diagnosed mechanism or a bounded set of hypotheses.
+
+## Reply
+
+State the observed symptom, the mechanism or remaining hypotheses, and the evidence for each. Label what is unproven.

@@ -18,3 +18,7 @@ Use for: Continue from a handoff or prior task state.
 ## Completion evidence
 
 The resumed state is reconciled against current artifacts rather than accepted from a prior summary.
+
+## Reply
+
+State what you confirmed from the artifacts, what differed from the handoff, and the next step.

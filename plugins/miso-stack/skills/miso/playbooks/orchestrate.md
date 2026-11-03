@@ -18,3 +18,7 @@ Use for: Own dependent tasks across sessions or workers.
 ## Completion evidence
 
 Task ownership and dependency order are valid, and integrated artifacts pass their declared checks.
+
+## Reply
+
+State the status of each task, its evidence, what is blocked and why, and the next ready task.

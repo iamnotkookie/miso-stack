@@ -18,3 +18,7 @@ Use for: Create or correct a tutorial, how-to, reference, or explanation.
 ## Completion evidence
 
 A reader can follow the documented procedure and obtain the stated result.
+
+## Reply
+
+State what you wrote, which commands you ran to test it, and which claims you could not verify.

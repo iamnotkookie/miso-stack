@@ -18,3 +18,7 @@ Use for: Measure a prompt or skill change against explicit cases.
 ## Completion evidence
 
 Recorded cases and artifacts support each evaluation verdict.
+
+## Reply
+
+State the sample count, the harness, the model selection, and each verdict. Report a null or negative result plainly.

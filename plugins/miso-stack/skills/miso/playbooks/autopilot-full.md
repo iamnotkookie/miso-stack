@@ -18,3 +18,7 @@ Use for: Build and verify independent changes with explicit publication gates.
 ## Completion evidence
 
 Each queue item has independent proof and external effects remain within explicit authority.
+
+## Reply
+
+List each change with its status, its evidence, and the gate it waits on. Name what stopped.

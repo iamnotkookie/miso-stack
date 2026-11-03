@@ -18,3 +18,7 @@ Use for: Execute one long task while the user is away.
 ## Completion evidence
 
 The declared outcome has evidence, or remaining blockers and exact next steps are documented.
+
+## Reply
+
+State the outcome against the end condition, what ran, the decision trail location, and any gate that stopped work.

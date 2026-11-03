@@ -32,6 +32,6 @@ Use the control contract's inspection, navigation, interaction, performance, str
 
 Compare the feature index with routes, commands, recent changes, and existing feature files. Drive each documented feature on the current app. Separate stale documentation, broken driver behavior, and product defects. Repair the first two within scope and rerun them. Record product defects without silently expanding the task. Mark inaccessible features with the missing prerequisite and attempted path.
 
-Return verified, failed, or unverified per check, with the exact evidence. Tests, static checks, and live proof remain separate.
+Return verified, failed, or unverified per check, with the exact evidence. An inconclusive result is unverified. So is a check on a different surface from the user's. Tests, static checks, and live proof remain separate.
 
 If a headless command is denied, do not assume the user cancelled the task. Identify the blocked permission and continue through an already authorized tool when possible. Use simple commands or the bundled `record` helper instead of a shell chain that the host cannot safely authorize. Never bypass the host's security controls.

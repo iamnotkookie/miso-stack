@@ -18,3 +18,7 @@ Use for: Prepare an ordered sequence of dependent changes.
 ## Completion evidence
 
 Each unit and the combined tip are verified, with a clear dependency order.
+
+## Reply
+
+List the stack in landing order with each unit's evidence. State what must happen before landing.

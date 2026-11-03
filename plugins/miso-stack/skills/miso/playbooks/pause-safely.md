@@ -18,3 +18,7 @@ Use for: Suspend work without losing state or proof.
 ## Completion evidence
 
 A new session can identify current state and resume without reconstructing lost context.
+
+## Reply
+
+State where the work stopped, the exact state on disk, and the next command to run.
