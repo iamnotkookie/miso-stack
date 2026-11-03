@@ -1,6 +1,6 @@
 # MisoStack development
 
-Read `plugins/miso-stack/skills/miso/SKILL.md` for engineering work on this stack. Preserve the confirmed decisions in `HANDOFF.md`. Lucas authorized Git initialization and the initial local commit. Follow the current request for subsequent commits; remotes and publication require authorization.
+Read `plugins/miso-stack/skills/miso/SKILL.md` for engineering work on this stack. Follow the current request for commits. Remotes and publication require authorization. `package.json` owns the version; `scripts/check_repository.py` rejects a manifest that differs.
 
 Use the shared source tree. Do not vendor third-party skill code. Keep factual qualification separate from documentation claims. Run `python3 plugins/miso-stack/scripts/miso.py check`, `python3 -m unittest discover -s tests`, and `python3 scripts/check_repository.py` after relevant changes.
 

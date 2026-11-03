@@ -66,6 +66,35 @@ class PackageTest(unittest.TestCase):
             self.assertNotEqual(result.returncode, 0)
             self.assertIn("router does not reach every supporting skill", result.stderr)
 
+    def repository_check_copy(self, directory):
+        target = Path(directory) / "repo"
+        for name in ["package.json", "scripts/check_repository.py", ".claude-plugin/marketplace.json",
+                     ".grok-plugin/marketplace.json", ".agents/plugins/marketplace.json",
+                     "plugins/miso-stack/.claude-plugin/plugin.json", "plugins/miso-stack/.codex-plugin/plugin.json",
+                     "plugins/miso-stack/.grok-plugin/plugin.json"]:
+            (target / name).parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy(ROOT / name, target / name)
+        return target
+
+    def test_repository_check_accepts_matching_versions(self):
+        with tempfile.TemporaryDirectory() as directory:
+            target = self.repository_check_copy(directory)
+            result = subprocess.run([sys.executable, str(target / "scripts/check_repository.py")], capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stdout)
+
+    def test_repository_check_rejects_version_drift(self):
+        for name in ["plugins/miso-stack/.claude-plugin/plugin.json", ".claude-plugin/marketplace.json"]:
+            with self.subTest(name), tempfile.TemporaryDirectory() as directory:
+                target = self.repository_check_copy(directory)
+                path = target / name
+                data = json.loads(path.read_text())
+                (data["plugins"][0] if "plugins" in data else data)["version"] = "0.0.1"
+                path.write_text(json.dumps(data))
+                result = subprocess.run([sys.executable, str(target / "scripts/check_repository.py")], capture_output=True, text=True)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn(name, result.stdout)
+                self.assertIn("package.json", result.stdout)
+
     def test_fixture_exposes_defect_and_preserves_existing_directory(self):
         with tempfile.TemporaryDirectory() as directory:
             target = Path(directory) / "fixture"
