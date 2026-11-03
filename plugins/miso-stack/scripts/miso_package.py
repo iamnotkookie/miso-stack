@@ -3,6 +3,7 @@ from pathlib import Path
 import re
 import shutil
 
+import miso_contracts
 from miso_io import lock, read_json, require
 
 
@@ -83,6 +84,7 @@ def check():
             dest = (path.parent / link.split("#")[0]).resolve()
             if not dest.is_relative_to(ROOT) or not dest.exists():
                 errors.append(f"Broken or escaping link in {path.relative_to(ROOT)}: {link}")
+    errors += miso_contracts.errors(ROOT)
     require(not errors, "Package check failed:\n" + "\n".join(errors))
     return {"valid": True, "skills": len(skills), "workflows": len(data["workflows"])}
 

@@ -66,6 +66,71 @@ class PackageTest(unittest.TestCase):
             self.assertNotEqual(result.returncode, 0)
             self.assertIn("router does not reach every supporting skill", result.stderr)
 
+    def package_check_after(self, edit):
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory) / "plugin"
+            shutil.copytree(PLUGIN, target, ignore=shutil.ignore_patterns("__pycache__"))
+            edit(target)
+            return subprocess.run([sys.executable, str(target / "scripts/miso.py"), "check"], capture_output=True, text=True)
+
+    def test_package_rejects_a_principle_without_a_trigger(self):
+        def edit(target):
+            leaf = target / "skills/miso/references/principles/prove-it-works.md"
+            leaf.write_text(leaf.read_text().replace("**Apply when:**", "**Note:**"))
+        result = self.package_check_after(edit)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("principles/prove-it-works.md: use a title", result.stderr)
+
+    def test_package_rejects_a_principle_missing_from_the_index(self):
+        def edit(target):
+            leaf = target / "skills/miso/references/principles/new-idea.md"
+            leaf.write_text("# New idea\n\n**Apply when:** Now.\n\n**Rule:** Do it.\n\n**Why:** Reason.\n\n- Act.\n")
+        result = self.package_check_after(edit)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("new-idea.md has no row", result.stderr)
+
+    def test_package_rejects_a_citation_of_the_principle_index(self):
+        def edit(target):
+            skill = target / "skills/miso-tdd/SKILL.md"
+            skill.write_text(skill.read_text() + "\nSee [rules](../miso/references/principles.md).\n")
+        result = self.package_check_after(edit)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("cites the principles index", result.stderr)
+
+    def test_a_deleted_principle_breaks_its_citations(self):
+        result = self.package_check_after(lambda target: (target / "skills/miso/references/principles/structure.md").unlink())
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("miso-tdd/SKILL.md", result.stderr)
+
+    def overlap(self, upstream_text):
+        with tempfile.TemporaryDirectory() as directory:
+            (Path(directory) / "skill.md").write_text(upstream_text)
+            return subprocess.run([sys.executable, str(ROOT / "scripts/check_overlap.py"), directory], capture_output=True, text=True)
+
+    def test_overlap_check_finds_a_copied_sequence(self):
+        result = self.overlap("Someone wrote: Use `miso` as the single entry point elsewhere.")
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("miso/SKILL.md", result.stdout)
+
+    def test_overlap_check_passes_on_unrelated_text(self):
+        self.assertEqual(self.overlap("Zebra quartz vexing jumbo plaid fox nymph.").returncode, 0)
+
+    def test_package_rejects_an_oversized_principle(self):
+        def edit(target):
+            leaf = target / "skills/miso/references/principles/structure.md"
+            leaf.write_text(leaf.read_text() + "- " + "word " * 251 + "\n")
+        result = self.package_check_after(edit)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("principles/structure.md: more than 250 words", result.stderr)
+
+    def test_package_rejects_a_duplicate_principle_row(self):
+        def edit(target):
+            index = target / "skills/miso/references/principles.md"
+            index.write_text(index.read_text() + "| Again. | [structure](principles/structure.md) |\n")
+        result = self.package_check_after(edit)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("structure.md is listed twice", result.stderr)
+
     def grade(self, case, answer):
         with tempfile.TemporaryDirectory() as directory:
             trace = Path(directory) / "stdout.jsonl"

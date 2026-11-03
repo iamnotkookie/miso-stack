@@ -15,7 +15,7 @@ For a plain restatement of the last answer or an edit of supplied prose, work fr
 1. Select the requested capability from [the routing table](references/routing.md). A plain restatement or edit of supplied prose needs no repository investigation. For engineering work, read project instructions and the relevant code. Preserve current user changes.
 2. State the intended outcome and the observable result that will prove it.
 3. Identify the running harness from session metadata and the actual tools. Read its map: [Codex](references/codex.md), [Claude Code](references/claude-code.md), [Grok Build](references/grok-build.md), or [OpenCode](references/opencode.md). Never infer the host from a model name. With an unknown host, use only observed tools and stay serial.
-4. Read [principles](references/principles.md) and [writing](references/writing.md). Apply relevant rules. Name a principle only when it changed a choice.
+4. Read [writing](references/writing.md) and the [principle index](references/principles.md). When a row fits the work, read its leaf before you apply it. Name a principle only when you read its leaf and it changed a choice.
 5. Follow an existing project model configuration. Otherwise leave the model unset so the harness selects its default. Do not invent a role panel or fixed model IDs.
 6. For work that needs a multi-step workflow, select one below. A specific capability can run directly through the routing table. Read its file before acting. Use a task list for substantial work. Mark a skipped step with its reason.
 

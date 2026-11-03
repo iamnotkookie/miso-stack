@@ -6,7 +6,7 @@ license: MIT
 
 # Review
 
-Apply the shared rules and current host map in [miso](../miso/SKILL.md). Read [structure](../miso/references/principles.md) before judging design. When called directly, run this procedure after reading those rules. When called from a playbook, continue that playbook without restarting routing.
+Apply the shared rules and current host map in [miso](../miso/SKILL.md). Read [structure](../miso/references/principles/structure.md) before judging design. When called directly, run this procedure after reading those rules. When called from a playbook, continue that playbook without restarting routing.
 
 ## Written round
 
@@ -27,7 +27,7 @@ A thread that links several open changes is a pack. Review each open change stil
 1. Fix the scope to a revision or explicit file set. Read the intended behavior and repository rules before the diff.
 2. Trace changed contracts beyond direct callers. Include serialization, data migrations, configuration, permissions, background tasks, teardown, and old consumers when relevant.
 3. Identify the assumption on which safety depends. Try to falsify it with the real code. Distinguish a proven defect from an untested hypothesis.
-4. Inspect input validation, authorization, secret handling, error exposure, injection risks, and destructive operations. Use existing scanners where available. Report tools that could not run. A repository audit, or a question about installing a skill, is [miso-audit](../miso-audit/SKILL.md). On this diff, apply [security](../miso/references/principles.md).
+4. Inspect input validation, authorization, secret handling, error exposure, injection risks, and destructive operations. Use existing scanners where available. Report tools that could not run. A repository audit, or a question about installing a skill, is [miso-audit](../miso-audit/SKILL.md). On this diff, apply [security](../miso/references/principles/security.md).
 5. Check unnecessary layers, dead code, hidden mutation, duplicated state, misleading comments, and suppressed checks. Keep comments that explain a real constraint the code cannot express. Do not delete license notices.
 6. For TypeScript, read [type review](../miso/references/typescript.md). For broad changes, partition review lenses with [swarm](../miso-swarm/SKILL.md) if permitted. Reviewers inspect independently; the lead validates findings.
 7. A review request is read-only. Fix findings only when the user also requested repairs or implementation. In that case, fix accepted findings within scope and rerun affected checks. Do not change expected results just to make a failing test pass.
