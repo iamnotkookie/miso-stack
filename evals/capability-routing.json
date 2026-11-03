@@ -234,6 +234,12 @@
       "prompt": "Run a bounded series of performance experiments on startup latency.",
       "skill": "miso-perf",
       "mode": "default"
+    },
+    {
+      "id": "correct-repeat",
+      "prompt": "Agents keep calling the database client directly no matter how many times we correct them. Make that stop happening.",
+      "skill": "miso-garden",
+      "mode": "correct"
     }
   ]
 }

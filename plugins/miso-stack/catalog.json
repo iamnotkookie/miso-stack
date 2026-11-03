@@ -45,7 +45,7 @@
     {
       "name": "miso-garden",
       "path": "skills/miso-garden/SKILL.md",
-      "description": "Maintains codebase structure and turns recurring defects into enforced constraints. Use for codebase gardening, repeated helpers, growing suppressions, architecture drift, or installing anti-slop checks."
+      "description": "Maintains codebase structure and turns recurring defects and repeated corrections into enforced constraints. Use for codebase gardening, repeated helpers, growing suppressions, architecture drift, repeated agent mistakes, or installing anti-slop checks."
     },
     {
       "name": "miso-loop",

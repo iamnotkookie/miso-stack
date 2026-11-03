@@ -151,7 +151,7 @@ The installation guide now documents manual setup with `miso-stack install` and 
 
 ## Current local checks
 
-The current suite has 38 passing tests. The installer fixture now permits its exact temporary tarball path, which is how npm matches local package script permissions. A real controlling terminal is also required; a sandbox that blocks `/dev/tty` cannot qualify the automatic picker. The successful rerun used that terminal access without changing global npm policy. Package validation confirms 22 skills and 24 workflows. Repository syntax and link checks, whitespace checks, and the npm package preview pass. The package includes the local validation tools and routing evaluation cases.
+That suite had 38 passing tests. The installer fixture now permits its exact temporary tarball path, which is how npm matches local package script permissions. A real controlling terminal is also required; a sandbox that blocks `/dev/tty` cannot qualify the automatic picker. The successful rerun used that terminal access without changing global npm policy. Package validation confirms 22 skills and 24 workflows. Repository syntax and link checks, whitespace checks, and the npm package preview pass. The package includes the local validation tools and routing evaluation cases.
 
 ## Gardening, loops, performance, and app controls
 
@@ -178,3 +178,21 @@ A fresh fixture rechecked that correction. The baseline artifact was saved befor
 Artifacts remain in the system temporary directory under `miso-workflows-jqntqyqe`; they are not shipped. The behavioral and routing prompts remain in `evals/`.
 
 Limits: these tests used Codex agent contexts, not every native host UI. The boundary check handles static imports, not arbitrary dynamic imports. No real PR stream, external anti-slop installation, scheduler, browser capture, or continuation hook was tested. Cancellation had no live owned background process to stop. Cleanup execution was unavailable under the fixture's no-deletion rule; only the read-only preview was qualified. The loop is an active-session procedure, not a background service.
+
+## Entry rules, principle leaves, and reply contracts
+
+This compared the skills before and after the change on Claude Code 2.1.316, using the host default model, on 3 November 2026. The baseline had skills identical to `main`. The rubric was fixed before any run. One independent agent graded shuffled replies without arm labels, and the arms were unblinded afterward. Three runs per arm is a smoke comparison, not a reliability estimate. The table compares the candidate before review fixes. Those fixes reworded repeated prose and changed no rule. One further run of each of the four cases on the final revision matched the After column for routing and for the final result, and its `bug-fix` reply pasted both outputs.
+
+| Check | Before | After |
+| --- | --- | --- |
+| `routing`, graded by `grade_routing.py` | 24 of 24 | 24 of 24 |
+| `capability-routing`, graded by `grade_routing.py` | 39 of 39 | 40 of 40, with one new case |
+| `false-premise`: `calculator.py` unchanged, reply says the crash did not reproduce | 3 of 3 | 3 of 3 |
+| `false-premise`: negative-input output block in the reply | 0 of 3 | 3 of 3 |
+| `bug-fix`: CLI correct and tests pass | 3 of 3 | 3 of 3 |
+| `bug-fix`: failing and passing output pasted in the reply | 0 of 3 | 3 of 3 |
+| `bug-fix`: names what was not verified | 1 of 3 | 3 of 3 |
+
+The change altered what agents report. It did not alter whether they reached the right result. The baseline already refused the false-premise guard in every run, so that case did not separate the arms. The fixture is small, so these runs say nothing about harder defects. The grader treated values in a table or prose as not showing output, and it could not confirm that pasted output was exact. `review-boundary` and `smoke` ran only on the candidate. Codex, Grok Build, and OpenCode were not run.
+
+No routing trace on either arm mentions `evals/`, so the labels were not read. Default-path instructions fell from 2,173 words (entry and principles) to 1,526 words (entry and index). Raw traces stay local.

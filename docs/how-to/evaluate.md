@@ -32,7 +32,7 @@ The runner closes the child's standard input. The task arrives only through the 
 
 Use `--case routing` to classify all 24 specialist and default scenarios in [routing.json](../../evals/routing.json). The model sees the requests but not their expected labels. This tests workflow selection; it does not execute those workflows.
 
-Use `--case capability-routing` for the 39 skill-and-mode scenarios in [capability-routing.json](../../evals/capability-routing.json). This covers every supporting skill. Expected skills and modes are withheld from the prompt. A single-purpose skill reports mode `default`.
+Use `--case capability-routing` for the skill-and-mode scenarios in [capability-routing.json](../../evals/capability-routing.json). This covers every supporting skill. Expected skills and modes are withheld from the prompt. A single-purpose skill reports mode `default`.
 
 ```sh
 python3 scripts/run_evaluation.py --harness codex --case capability-routing --output /tmp/miso-capability-routing

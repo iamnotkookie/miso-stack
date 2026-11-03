@@ -8,29 +8,29 @@ license: MIT
 
 Apply the shared rules and current host map in [miso](../miso/SKILL.md). Read [structure](../miso/references/principles/structure.md) before judging design. When called directly, run this procedure after reading those rules. When called from a playbook, continue that playbook without restarting routing.
 
-## Written round
+## Scope and authority
 
-A code review is one written round. Approve when the change improves the health of the code, even if it is imperfect. Withhold approval when the change is incorrect, unsafe, untrustworthy, or makes the codebase worse. A nit never blocks. Approving does not merge.
+A review request is read-only. Fix findings only when the user also requested repairs. A nit never blocks. Approving does not merge.
 
-1. Recover intent from the title, the description, the linked ticket, and the discussion that pointed at the review. Reject early, with one alternative, when the change should not land.
-2. Record the tip SHA. Read the full diff and the existing threads.
-3. Prove gates on that SHA: pipeline URL and status, mergeability, approvals, open blockers. Do not call an unknown gate green. Skip notes a formatter or linter already owns.
-4. When the description says the issue is already fixed, or that this change replaces another, check the default branch and the other change. The same tip on another open change changes the verdict.
-5. Above about 400 changed lines, review design and name a split. Above about 1000, do not review line by line. Require a split.
-6. Judge the main design first. Send design notes and stop the round when the design is wrong. Naming and polish wait. Follow [comment style](references/comment-style.md). Keep the round at 20 notes or fewer. One sincere `praise:` when something is genuinely good.
-7. Choose `approve`, `request changes`, or `hold merge`. Hold means the code is acceptable and the merge waits on a parent, a conflict, or a red gate that is not this diff.
-8. Publish the summary and inline notes on the pull request before the chat reply. On approve, submit the host approval and do not merge. If the tip moved after an earlier approval, review the new tip before approving again. Do not message the author unless the user asked in this turn.
-9. Tell the user in one short note: verdict, URL, tip SHA, what the change does, what blocks merge, and what was posted. No em dash.
+Publishing is a message to other people. Publish notes or submit a host approval only when the user or project instructions authorize it for this change. Otherwise return the notes ready to post, and say that nothing was published.
 
-A thread that links several open changes is a pack. Review each open change still in scope. Skip a closed change unless the survivor absorbed it. One chat note for the pack. Publish on each change.
+## Procedure
 
-1. Fix the scope to a revision or explicit file set. Read the intended behavior and repository rules before the diff.
-2. Trace changed contracts beyond direct callers. Include serialization, data migrations, configuration, permissions, background tasks, teardown, and old consumers when relevant.
-3. Identify the assumption on which safety depends. Try to falsify it with the real code. Distinguish a proven defect from an untested hypothesis.
-4. Inspect input validation, authorization, secret handling, error exposure, injection risks, and destructive operations. Use existing scanners where available. Report tools that could not run. A repository audit, or a question about installing a skill, is [miso-audit](../miso-audit/SKILL.md). On this diff, apply [security](../miso/references/principles/security.md).
-5. Check unnecessary layers, dead code, hidden mutation, duplicated state, misleading comments, and suppressed checks. Keep comments that explain a real constraint the code cannot express. Do not delete license notices.
-6. For TypeScript, read [type review](../miso/references/typescript.md). For broad changes, partition review lenses with [swarm](../miso-swarm/SKILL.md) if permitted. Reviewers inspect independently; the lead validates findings.
-7. A review request is read-only. Fix findings only when the user also requested repairs or implementation. In that case, fix accepted findings within scope and rerun affected checks. Do not change expected results just to make a failing test pass.
+1. Fix the scope to a revision or explicit file set. Record the tip SHA. Recover intent from the title, the description, the linked ticket, and the discussion. Read repository rules before the diff. Reject early, with one alternative, when the change should not land.
+2. Read the full diff and the existing threads. Prove gates on that SHA: pipeline URL and status, mergeability, approvals, open blockers. Do not call an unknown gate green. Skip notes a formatter or linter already owns.
+3. When the description says the issue is already fixed, or that this change replaces another, check the default branch and the other change. The same tip on another open change changes the verdict.
+4. Above about 400 changed lines, review design and name a split. Above about 1000, do not review line by line. Require a split.
+5. Judge the main design first. When the design is wrong, send design notes and stop the round. Naming and polish wait.
+6. Trace changed contracts beyond direct callers. Include serialization, data migrations, configuration, permissions, background tasks, teardown, and old consumers when relevant.
+7. Name the assumption on which safety depends, and try to falsify it with the real code. Separate a proven defect from an untested hypothesis. A finding you did not prove carries an uncertainty label.
+8. Inspect input validation, authorization, secret handling, error exposure, injection risks, and destructive operations. Use existing scanners where available, and report tools that could not run. A repository audit, or a question about installing a skill, is [miso-audit](../miso-audit/SKILL.md). On this diff, apply [security](../miso/references/principles/security.md).
+9. Check unnecessary layers, dead code, hidden mutation, duplicated state, misleading comments, and suppressed checks. Keep comments that explain a real constraint the code cannot express. Do not delete license notices.
+10. For TypeScript, read [type review](../miso/references/typescript.md). For broad changes, partition review lenses with [swarm](../miso-swarm/SKILL.md) if permitted. Reviewers inspect independently, and the lead validates findings.
+11. Choose `approve`, `request changes`, or `hold merge`. Approve when the change improves the health of the code, even if it is imperfect. Withhold approval when it is incorrect, unsafe, untrustworthy, or makes the codebase worse. Hold means the code is acceptable and the merge waits on a parent, a conflict, or a red gate that is not this diff.
+
+Follow [comment style](references/comment-style.md). Keep the round at 20 notes or fewer, with one sincere `praise:` when something is genuinely good. If the tip moved after an earlier approval, review the new tip before you approve again. Do not message the author unless the user asked in this turn. When fixes are also requested, fix accepted findings within scope and rerun affected checks. Do not change an expected result just to make a failing test pass.
+
+A thread that links several open changes is a pack. Review each open change still in scope, and skip a closed change unless the survivor absorbed it. Give one chat note for the pack.
 
 ## Choose the review mode
 
@@ -39,4 +39,6 @@ A thread that links several open changes is a pack. Review each open change stil
 - **Challenge:** use the same intent, revision, context, and rubric for independent reviewers when permitted. Use project model configuration or host defaults; never invent model diversity. With no delegation, disclose a serial review. Validate each finding against source or a probe, deduplicate, and explain disagreements. Agreement is a lead, not proof. Classify findings as fix now, consider, or dismissed with reasons. Return a verdict without auto-applying edits.
 - **Comments:** use [the comment review](references/comments.md) for requested cleanup of comments, suppressions, and workarounds. This is not a command to remove every comment.
 
-Report actionable findings first. Each needs severity, a concrete trigger, impact, source location, and evidence or an explicit uncertainty label. State what was reviewed and what was not. No findings is a result, not proof of perfection.
+## Reply
+
+Give the verdict, the change URL, the tip SHA, what the change does, what blocks merge, and what was posted or left unposted. List actionable findings first. Each needs severity, a concrete trigger, impact, source location, and evidence or an uncertainty label. State what was reviewed and what was not. No findings is a result, not proof of perfection.
