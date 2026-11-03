@@ -240,6 +240,12 @@
       "prompt": "Agents keep calling the database client directly no matter how many times we correct them. Make that stop happening.",
       "skill": "miso-garden",
       "mode": "correct"
+    },
+    {
+      "id": "merge-request-review",
+      "prompt": "Review this merge request: https://gitlab.example.com/acme/api/-/merge_requests/42",
+      "skill": "miso-review",
+      "mode": "code review"
     }
   ]
 }

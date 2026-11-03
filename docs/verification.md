@@ -196,3 +196,20 @@ This compared the skills before and after the change on Claude Code 2.1.316, usi
 The change altered what agents report. It did not alter whether they reached the right result. The baseline already refused the false-premise guard in every run, so that case did not separate the arms. The fixture is small, so these runs say nothing about harder defects. The grader treated values in a table or prose as not showing output, and it could not confirm that pasted output was exact. `review-boundary` and `smoke` ran only on the candidate. Codex, Grok Build, and OpenCode were not run.
 
 No routing trace on either arm mentions `evals/`, so the labels were not read. Default-path instructions fell from 2,173 words (entry and principles) to 1,526 words (entry and index). Raw traces stay local.
+
+## Review skill parity
+
+`miso-review` gained the method of a separate review skill and support for merge requests. These runs used Claude Code 2.1.316 and the host default model on 3 November 2026.
+
+| Check | Before | After |
+| --- | --- | --- |
+| `review-planted`: seven planted problems found, three runs, blind graded | 21 of 21 | 20 of 21 |
+| `review-planted`: names the one safety fact with its grade | 0 of 3 | 3 of 3 |
+| `review-planted`: lists what was checked and found fine | 0 of 3 | 3 of 3 |
+| `capability-routing` | not run | 41 of 41 |
+
+The old skill already found every planted problem on this small diff. The one miss after the change was a close call: that reply showed the new output for invalid input but did not say that it becomes 0. The change altered what the reply proves and reports, and this fixture cannot show more than that. The blind runs used the first candidate commit. Review fixes followed, and one further run of `review-planted` and `capability-routing` on the final revision matched.
+
+Read-only runs reviewed a real pull request and a public GitLab merge request. Write commands were denied, so these runs could not have posted. The pull request had the same counts of comments and reviews afterward.
+
+Posting was tested only against a stubbed `gh`, not a real host. With authorization and no earlier summary, the agent made one batched review, submitted as a comment, with real line breaks and no secret value. With a summary that named the tip SHA, it posted nothing. Anchor rejection, a real GitLab post, a merged or closed change, a red pipeline, a change over 1000 lines, and audit escalation were not run. Codex, Grok Build, and OpenCode were not run.

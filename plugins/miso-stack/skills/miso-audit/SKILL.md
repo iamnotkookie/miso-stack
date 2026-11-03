@@ -8,7 +8,7 @@ license: MIT
 
 Apply the shared rules and current host map in [miso](../miso/SKILL.md). Apply [security](../miso/references/principles/security.md). When called directly, run this procedure after reading those rules. When called from a playbook, continue that playbook without restarting routing.
 
-A review of one change stays in [miso-review](../miso-review/SKILL.md). A request to attack, exploit, or penetration-test a live system stops. Live testing is outside this skill. If the user owns the source, continue with a source audit.
+A review of one change stays in [miso-review](../miso-review/SKILL.md), which requests an audit scoped to the diff when the change is risky. A request to attack, exploit, or penetration-test a live system stops. Live testing is outside this skill. If the user owns the source, continue with a source audit.
 
 Select code or skill from the request. The audit is read-only unless the user also asked for repairs. Repairs go through the normal change workflow, then a fresh confirmation. Record a long audit with [miso-trail](../miso-trail/SKILL.md). Partition independent coverage with [miso-swarm](../miso-swarm/SKILL.md) when the host allows it. Otherwise say the pass is serial: the same agent found the lead and tried to disprove it.
 

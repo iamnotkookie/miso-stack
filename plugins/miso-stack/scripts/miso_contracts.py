@@ -64,5 +64,19 @@ def prose_errors(root):
     return errors
 
 
+def reference_errors(root):
+    reachable = set()
+    pending = [path.resolve() for path in (root / "skills").glob("*/SKILL.md")]
+    while pending:
+        path = pending.pop()
+        if path in reachable or path.suffix != ".md" or not path.is_file():
+            continue
+        reachable.add(path)
+        pending += [(path.parent / link).resolve() for link in re.findall(r"\]\(([^)#]+)", path.read_text())
+                    if not re.match(r"[a-z]+://", link)]
+    return [f"{path.relative_to(root)}: no skill reaches this reference, so no agent will read it."
+            for path in sorted((root / "skills").rglob("references/*.md")) if path.resolve() not in reachable]
+
+
 def errors(root, catalog):
-    return principle_errors(root) + playbook_errors(root, catalog) + prose_errors(root)
+    return principle_errors(root) + playbook_errors(root, catalog) + prose_errors(root) + reference_errors(root)

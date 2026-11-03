@@ -21,7 +21,7 @@ For a routing evaluation, return the skill name and the mode named after the lin
 | Repeat build/check/fix work, resume a loop, or cancel it | [miso-loop](../../miso-loop/SKILL.md) |
 | Measure or improve latency, throughput, memory, or startup | [miso-perf](../../miso-perf/SKILL.md) |
 | Diagnose broken, intermittent, or slow behavior | [miso-debug](../../miso-debug/SKILL.md) |
-| Review code against standards and requirements | [miso-review](../../miso-review/SKILL.md), code review |
+| Review a pull request, merge request, or code against standards and requirements | [miso-review](../../miso-review/SKILL.md), code review |
 | Security-audit a repository, tree, or diff | [miso-audit](../../miso-audit/SKILL.md), code |
 | Decide whether a skill or plugin is safe to install or ship | [miso-audit](../../miso-audit/SKILL.md), skill |
 | Find what a change could break elsewhere | [miso-review](../../miso-review/SKILL.md), impact |
@@ -53,7 +53,7 @@ For a routing evaluation, return the skill name and the mode named after the lin
 - “Explain that more simply” only rewrites the existing answer. It does not authorize tools, repository searches, or new claims.
 - A bug report routes to diagnosis. A repair request adds the bug-fix workflow and verification. A diagnosis-only request stops at evidence and a cause or explicit uncertainty.
 - “What would this break?” selects impact review even if the diff is small. “Remove comments” selects comment cleanup, not prose editing.
-- A security note on one change or pull request stays code review. Auditing a repository, or deciding whether a skill or plugin is safe to install, selects miso-audit.
+- A security note on one change, pull request, or merge request stays code review. Auditing a repository, or deciding whether a skill or plugin is safe to install, selects miso-audit.
 - A request to attack or penetration-test a live system selects miso-audit and stops at that skill’s refusal.
 - A conflict in an existing merge/rebase selects merge resolution. “Merge my PR” is a separate shipping action with its own authority.
 - Missing history, a tracker, a worker API, or an app runtime must be stated. Use the supported local or serial path; do not invent access or completed work.
