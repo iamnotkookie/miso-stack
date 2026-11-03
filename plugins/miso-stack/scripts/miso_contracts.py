@@ -64,5 +64,16 @@ def prose_errors(root):
     return errors
 
 
+def reference_errors(root):
+    errors = []
+    documents = sorted((root / "skills").rglob("*.md"))
+    linked = {(path.parent / link).resolve() for path in documents
+              for link in re.findall(r"\]\(([^)#]+)", path.read_text()) if not re.match(r"[a-z]+://", link)}
+    for path in documents:
+        if path.parent.name == "references" and path.resolve() not in linked:
+            errors.append(f"{path.relative_to(root)}: nothing links to this reference, so no agent will read it.")
+    return errors
+
+
 def errors(root, catalog):
-    return principle_errors(root) + playbook_errors(root, catalog) + prose_errors(root)
+    return principle_errors(root) + playbook_errors(root, catalog) + prose_errors(root) + reference_errors(root)

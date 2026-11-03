@@ -136,6 +136,24 @@ class PackageTest(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("playbooks/bug-fix.md: Reply must say", result.stderr)
 
+    def test_package_rejects_an_orphaned_reference(self):
+        result = self.package_check_after(lambda target: (target / "skills/miso-review/references/extra.md").write_text("# Extra\n"))
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("references/extra.md: nothing links", result.stderr)
+
+    def test_review_skill_names_both_change_types(self):
+        catalog = json.loads((PLUGIN / "catalog.json").read_text())
+        description = next(row["description"] for row in catalog["skills"] if row["name"] == "miso-review")
+        for term in ["pull request", "merge request"]:
+            self.assertIn(term, description)
+
+    def test_review_fixture_diff_applies_to_the_fixture(self):
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory) / "fixture"
+            subprocess.run([sys.executable, str(ROOT / "scripts/create_sandbox.py"), str(target)], capture_output=True, check=True)
+            result = subprocess.run(["git", "apply", "--check", "changes/review.diff"], cwd=target, capture_output=True, text=True)
+            self.assertEqual(result.returncode, 0, result.stderr)
+
     def test_package_rejects_a_long_dash_in_a_skill(self):
         def edit(target):
             skill = target / "skills/miso-tdd/SKILL.md"

@@ -80,7 +80,7 @@
     {
       "name": "miso-review",
       "path": "skills/miso-review/SKILL.md",
-      "description": "Reviews correctness, security, change impact, and code quality against evidence. Use for code review, adversarial review, blast-radius analysis, or final quality checks."
+      "description": "Reviews a pull request, merge request, branch, or diff for correctness, security, change impact, and code quality against evidence. Use for code review, adversarial review, blast-radius analysis, QA validation, or final quality checks."
     },
     {
       "name": "miso-setup",
