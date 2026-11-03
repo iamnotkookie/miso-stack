@@ -6,7 +6,7 @@ license: MIT
 
 # Security audit
 
-Apply the shared rules and current host map in [miso](../miso/SKILL.md). Apply [security](../miso/references/principles.md). When called directly, run this procedure after reading those rules. When called from a playbook, continue that playbook without restarting routing.
+Apply the shared rules and current host map in [miso](../miso/SKILL.md). Apply [security](../miso/references/principles/security.md). When called directly, run this procedure after reading those rules. When called from a playbook, continue that playbook without restarting routing.
 
 A review of one change stays in [miso-review](../miso-review/SKILL.md). A request to attack, exploit, or penetration-test a live system stops. Live testing is outside this skill. If the user owns the source, continue with a source audit.
 

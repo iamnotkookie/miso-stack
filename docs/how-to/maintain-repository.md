@@ -13,6 +13,12 @@ python3 -m unittest discover -s tests -v
 git diff --check
 ```
 
+MisoStack credits pstack as a design reference and must not copy it. Before you merge new skill prose, compare it with a pstack checkout. The command exits 1 and lists each line that shares six consecutive words:
+
+```sh
+python3 scripts/check_overlap.py PATH_TO_PSTACK --base origin/main
+```
+
 The installer test uses a temporary npm prefix and a pseudo-terminal. It grants script permission only to the local tarball built by the test. Run it in an environment that permits pseudo-terminals.
 
 Wait for all required checks and resolve review conversations. If `main` changes, update your branch and wait for the new results. Merge with **Squash and merge**. GitHub deletes the merged branch.
