@@ -66,6 +66,51 @@ class PackageTest(unittest.TestCase):
             self.assertNotEqual(result.returncode, 0)
             self.assertIn("router does not reach every supporting skill", result.stderr)
 
+    def grade(self, case, answer):
+        with tempfile.TemporaryDirectory() as directory:
+            trace = Path(directory) / "stdout.jsonl"
+            event = {"type": "result", "result": "Here it is:\n```json\n" + json.dumps(answer) + "\n```"}
+            trace.write_text("not json\n" + json.dumps({"prompt": "[{\"id\": \"1\"}]"}) + "\n" + json.dumps(event) + "\n")
+            return subprocess.run([sys.executable, str(ROOT / "scripts/grade_routing.py"), "--case", case, str(trace)],
+                                  capture_output=True, text=True)
+
+    def test_routing_grader_accepts_correct_answers(self):
+        cases = json.loads((ROOT / "evals/capability-routing.json").read_text())["cases"]
+        answer = [{"id": row["id"], "skill": row["skill"], "mode": row["mode"]} for row in cases]
+        result = self.grade("capability-routing", answer)
+        self.assertEqual(result.returncode, 0, result.stdout)
+        self.assertEqual(json.loads(result.stdout)["correct"], len(cases))
+
+    def test_routing_grader_reports_a_wrong_or_missing_route(self):
+        cases = json.loads((ROOT / "evals/routing.json").read_text())["cases"]
+        answer = [{"id": row["id"], "workflow": row["expected_workflow"]} for row in cases[1:]]
+        answer[0]["workflow"] = "wrong"
+        result = self.grade("routing", answer)
+        self.assertEqual(result.returncode, 1)
+        graded = json.loads(result.stdout)
+        self.assertEqual(graded["correct"], len(cases) - 2)
+        self.assertEqual({miss["id"] for miss in graded["misses"]}, {cases[0]["id"], cases[1]["id"]})
+
+    def test_routing_grader_fails_on_a_trace_with_no_answer(self):
+        with tempfile.TemporaryDirectory() as directory:
+            trace = Path(directory) / "stdout.jsonl"
+            trace.write_text(json.dumps({"type": "result", "result": "I could not classify these."}) + "\n")
+            result = subprocess.run([sys.executable, str(ROOT / "scripts/grade_routing.py"), "--case", "routing", str(trace)],
+                                    capture_output=True, text=True)
+            self.assertEqual(result.returncode, 2)
+
+    def test_routing_grader_rejects_a_trace_that_touches_the_labels(self):
+        cases = json.loads((ROOT / "evals/routing.json").read_text())["cases"]
+        answer = [{"id": row["id"], "workflow": row["expected_workflow"]} for row in cases]
+        with tempfile.TemporaryDirectory() as directory:
+            trace = Path(directory) / "stdout.jsonl"
+            trace.write_text(json.dumps({"tool": "Read", "input": "/repo/evals/routing.json"}) + "\n"
+                             + json.dumps({"type": "result", "result": json.dumps(answer)}) + "\n")
+            result = subprocess.run([sys.executable, str(ROOT / "scripts/grade_routing.py"), "--case", "routing", str(trace)],
+                                    capture_output=True, text=True)
+            self.assertEqual(result.returncode, 2)
+            self.assertIn("could have read the labels", result.stderr)
+
     def repository_check_copy(self, directory):
         target = Path(directory) / "repo"
         for name in ["package.json", "scripts/check_repository.py", ".claude-plugin/marketplace.json",

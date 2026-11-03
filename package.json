@@ -36,6 +36,7 @@
     "evals/",
     "scripts/create_sandbox.py",
     "scripts/run_evaluation.py",
+    "scripts/grade_routing.py",
     "NOTICE",
     "scripts/check_repository.py",
     "tests/*.py",
